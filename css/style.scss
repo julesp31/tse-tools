@@ -1,3 +1,11 @@
+$bg-color: #f8f9fa;
+$sidebar-bg: #f1f3f5;
+$sidebar-border: #dee2e6;
+$link-color: #333;
+$link-hover-bg: #e9ecef;
+$link-hover-color: #007bff;
+$font-family: Arial, sans-serif;
+
 *,
 *::before,
 *::after {
@@ -9,21 +17,69 @@
   padding: 0;
 }
 
-html {
-
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #333;
+  padding: 15px 20px;
 }
 
-body {
-
+.navbar-title {
+  margin: 0 auto;
+  color: white;
 }
 
-.wrapper-main {
+#sidebar {
+  width: 150px;
+  background-color: $sidebar-bg;
+  padding: 10px;
+  position: fixed;
+  height: 100vh;
+  border-right: 1px solid $sidebar-border;
+}
 
+.sidebar-list,
+.sidebar-sublist {
+  list-style: none; /* Removes bullet points */
+}
+
+.sidebar-section {
+  margin-bottom: 20px;
+}
+
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  font-size: 18px;
+  font-weight: bold;
+  color: #1a73e8;
+  text-decoration: none;
+  margin-bottom: 10px;
+}
+
+.sidebar-sublist {
+  padding-left: 15px;
+}
+
+.sidebar-sublist li {
+  margin: 5px 0;
+}
+
+.sidebar-sublist li a {
+  color: #333;
+  text-decoration: none;
+  font-size: 16px;
+  transition: color 0.2s;
+}
+
+.sidebar-sublist li a:hover {
+  color: #1a73e8;
 }
 
 @media only screen and (max-width: 600px) and (orientation: landscape) {
 
-  .wrapper-main {
+  .wrapper{
 
   }
 
@@ -31,7 +87,7 @@ body {
 
 @media only screen and (max-width: 600px) and (orientation: portrait) {
 
-  .wrapper-main {
+  .wrapper {
 
   }
 
@@ -39,7 +95,7 @@ body {
 
 @media only screen and (min-width: 601px) and (orientation: landscape) {
 
-  .wrapper-main {
+  .wrapper {
 
   }
 
@@ -47,7 +103,7 @@ body {
 
 @media only screen and (min-width: 601px) and (orientation: portrait) {
 
-  .wrapper-main {
+  .wrapper {
 
   }
 
@@ -55,7 +111,7 @@ body {
 
 @media only screen and (min-width: 768px) and (orientation: landscape) {
 
-  .wrapper-main {
+  .wrapper{
 
   }
 
@@ -63,7 +119,7 @@ body {
 
 @media only screen and (min-width: 768px) and (orientation: portrait) {
 
-  .wrapper-main {
+  .wrapper {
 
   }
 
@@ -71,7 +127,7 @@ body {
 
 @media only screen and (min-width: 992px) and (orientation: landscape) {
 
-  .wrapper-main {
+  .wrapper {
 
   }
 
@@ -79,7 +135,7 @@ body {
 
 @media only screen and (min-width: 992px) and (orientation: portrait) {
 
-  .wrapper-main {
+  .wrapper {
 
   }
 
@@ -87,7 +143,7 @@ body {
 
 @media only screen and (min-width: 1200px) and (orientation: landscape) {
 
-  .wrapper-main {
+  .wrapper {
 
   }
 
@@ -95,7 +151,7 @@ body {
 
 @media only screen and (max-width: 1200px) and (orientation: portrait) {
 
-  .wrapper-main {
+  .wrapper {
 
   }
 

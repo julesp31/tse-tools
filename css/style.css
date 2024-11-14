@@ -7,4 +7,64 @@
 * {
   margin: 0;
   padding: 0;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #333;
+  padding: 15px 20px;
+}
+
+.navbar-title {
+  margin: 0 auto;
+  color: white;
+}
+
+#sidebar {
+  width: 150px;
+  background-color: #f1f3f5;
+  padding: 10px;
+  position: fixed;
+  height: 100vh;
+  border-right: 1px solid #dee2e6;
+}
+
+.sidebar-list,
+.sidebar-sublist {
+  list-style: none; /* Removes bullet points */
+}
+
+.sidebar-section {
+  margin-bottom: 20px;
+}
+
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  font-size: 18px;
+  font-weight: bold;
+  color: #1a73e8;
+  text-decoration: none;
+  margin-bottom: 10px;
+}
+
+.sidebar-sublist {
+  padding-left: 15px;
+}
+
+.sidebar-sublist li {
+  margin: 5px 0;
+}
+
+.sidebar-sublist li a {
+  color: #333;
+  text-decoration: none;
+  font-size: 16px;
+  transition: color 0.2s;
+}
+
+.sidebar-sublist li a:hover {
+  color: #1a73e8;
 }/*# sourceMappingURL=style.css.map */

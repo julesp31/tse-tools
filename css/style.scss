@@ -14,7 +14,7 @@
 
 .main-box{
   position: relative;
-  background: url('../tools_bg.jpg') right no-repeat;
+  background: url('../8324.png') right no-repeat;
   background-size: cover;
   height: 100vh;
   width: 100%;
@@ -148,67 +148,69 @@
   opacity: 1;
 }
 
+.input-box {
+  position: absolute;
+  top: 50%;
+  right: 25%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  border: 2px solid #fff;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  box-shadow: 0px 0px 8px rgba(255, 255, 255, 0.5);
+  width: 600px;
+  max-width: 90%;
+}
 
 
-// .navbar {
-//   display: flex;
-//   justify-content: space-between;
-//   align-items: center;
-//   background-color: #333;
-//   padding: 15px 20px;
-// }
+.input-box label {
+  font-size: 18px;
+  color: #fff;
+  margin-bottom: 8px;
+}
 
-// .navbar-title {
-//   margin: 0 auto;
-//   color: white;
-// }
+.input-box input,
+.input-box textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #fff;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  font-size: 16px;
+  outline: none;
+}
 
-// #sidebar {
-//   width: 150px;
-//   background-color: $sidebar-bg;
-//   padding: 10px;
-//   position: fixed;
-//   height: 100vh;
-//   border-right: 1px solid $sidebar-border;
-// }
+.input-box textarea {
+  resize: none;
+  height: 100px;
+  width: 555px;
+}
 
-// .sidebar-list,
-// .sidebar-sublist {
-//   list-style: none; /* Removes bullet points */
-// }
+.input-box button {
+  padding: 10px 20px;
+  font-size: 18px;
+  color: #fff;
+  background-color: #1a73e8;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
 
-// .sidebar-section {
-//   margin-bottom: 20px;
-// }
+.input-box button:hover {
+  background-color: #155ab6;
+}
 
-// .sidebar-header {
-//   display: flex;
-//   align-items: center;
-//   font-size: 18px;
-//   font-weight: bold;
-//   color: #1a73e8;
-//   text-decoration: none;
-//   margin-bottom: 10px;
-// }
 
-// .sidebar-sublist {
-//   padding-left: 15px;
-// }
 
-// .sidebar-sublist li {
-//   margin: 5px 0;
-// }
 
-// .sidebar-sublist li a {
-//   color: #333;
-//   text-decoration: none;
-//   font-size: 16px;
-//   transition: color 0.2s;
-// }
 
-// .sidebar-sublist li a:hover {
-//   color: #1a73e8;
-// }
+
 
 @media only screen and (max-width: 600px) and (orientation: landscape) {
 

@@ -46,21 +46,20 @@ def get_blocks(busy_list):
                     curly_amount -= 1
             curly_brace_count = curly_brace_count + curly_amount
 
-        if curly_brace_count == 0:
+        if curly_brace_count <= 0:
             current_block.append(word)
             blocks.append(current_block)
             current_block = []
             continue
 
         current_block.append(word)
-    '''
+
     iterator = 1
     for block in blocks:
         print(str(iterator) + ' ' + str(block))
         print()
         print()
         iterator += 1
-    '''
 
     return get_oit_times(blocks)
 

@@ -63,10 +63,7 @@ def get_blocks(busy_list):
         print()
         iterator += 1
     '''
-
     return get_busy_times(blocks)
-
-
 
 
 def get_busy_times(blocks):
@@ -74,10 +71,10 @@ def get_busy_times(blocks):
     block_iterator = 0
     for block in blocks:
         block_iterator += 1
-        ending_word = 'end'
+        ending_word = 'End'
         ending_time = ""
         ending_boolean = False
-        starting_word = 'start'
+        starting_word = 'Start'
         starting_time = ""
         starting_boolean = False
         time_list = {}

@@ -11,9 +11,11 @@ def combine_dict(my_dict):
 
     return slots_list
 
+
 def remove_milliseconds(date_string):
     # This regex ensures the Z is kept after removing milliseconds
     return re.sub(r'\.\d+', '', date_string).rstrip('Z')
+
 
 def datetime_dict(my_list):
     date_format = '%Y-%m-%dT%H:%M:%S'
@@ -53,6 +55,7 @@ def check_overlap(oit_dict, busy_dict):
         datetime(2024, 6, 4, 14, 0): datetime(2024, 6, 4, 16, 0),
     }
     '''
+
     dict_to_remove = []
     for start1, end1 in oit_dict.items():
         for start2, end2 in busy_dict.items():
@@ -64,15 +67,23 @@ def check_overlap(oit_dict, busy_dict):
         if oit_dict.__contains__(element):
             oit_dict.pop(element)
 
-    print(oit_dict)
+    return oit_dict
+
+
+def oit_times(oit_dict):
+    get_oits = oit_dict.items()
 
 
 def split_days(oit_slots, busy_slots):
     oit_list = combine_dict(oit_slots)
+    # print("oit List: " + str(oit_list))
     busy_list = combine_dict(busy_slots)
+    # print("Busy List: " + str(busy_list))
 
     oit_dictionary = datetime_dict(oit_list)
     busy_dictinoary = datetime_dict(busy_list)
 
-    check_overlap(oit_dictionary, busy_dictinoary)
-
+    oit_shit = check_overlap(oit_dictionary, busy_dictinoary)
+    for item in oit_shit:
+        print(item, "->", oit_shit[item])
+    print(oit_shit.items())

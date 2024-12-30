@@ -1,23 +1,23 @@
 
 
-def get_oit_list(athena_query):
+def get_scheduled_list(athena_query):
     list_of_words = athena_query.split()
-    starting_word = "oits"
-    ending_word = "}]},"
-    oit_list = []
-    oit_boolean = False
+    starting_word = "scheduled_times"
+    ending_word = "}]"
+    scheduled_list = []
+    scheduled_boolean = False
 
     for word in list_of_words:
-        if oit_boolean:
-            oit_list.append(word)
+        if scheduled_boolean:
+            scheduled_list.append(word)
 
-        if starting_word in word and not oit_boolean:
-            oit_boolean = True
+        if starting_word in word and not scheduled_boolean:
+            scheduled_boolean = True
 
-        if ending_word in word and oit_boolean:
-            oit_boolean = False
+        if ending_word in word and scheduled_boolean:
+            scheduled_boolean = False
 
-    return get_blocks(oit_list)
+    return get_blocks(scheduled_list)
 
 
 def get_blocks(busy_list):
@@ -53,6 +53,7 @@ def get_blocks(busy_list):
             continue
 
         current_block.append(word)
+
     '''
     iterator = 1
     for block in blocks:
@@ -61,12 +62,11 @@ def get_blocks(busy_list):
         print()
         iterator += 1
     '''
+    return get_scheduled_times(blocks)
 
-    return get_oit_times(blocks)
 
-
-def get_oit_times(blocks):
-    oit_times = {}
+def get_scheduled_times(blocks):
+    scheduled_times = {}
     block_iterator = 0
     for block in blocks:
         block_iterator += 1
@@ -96,6 +96,6 @@ def get_oit_times(blocks):
                 iterator = 0
                 time_boolean = False
 
-        oit_times[starting_time] = ending_time
+        scheduled_times[starting_time] = ending_time
 
-    return oit_times
+    return scheduled_times

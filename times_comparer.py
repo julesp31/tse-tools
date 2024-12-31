@@ -140,12 +140,12 @@ def check_overlapping_oits(oit_dictionary, merged_busy_dictionary):
     print("Scheduled Dictionary: ")
     print(scheduled_dictionary)
     print()
-    '''
+    
 
     oit_dictionary = {
-        datetime(2024, 6, 4, 8, 0) : datetime(2024, 6, 4, 10, 0),
-        datetime(2024, 6, 4, 12, 0) : datetime(2024, 6, 4, 14, 0),
-        datetime(2024, 6, 4, 16, 0): datetime(2024, 6, 4, 18, 0),
+        datetime(2024, 6, 4, 8, 0): datetime(2024, 6, 4, 10, 0),
+        datetime(2024, 6, 4, 12, 0): datetime(2024, 6, 4, 14, 0),
+        datetime(2024, 6, 4, 17, 30): datetime(2024, 6, 4, 18, 30),
     }
 
     merged_busy_dictionary = {
@@ -153,10 +153,14 @@ def check_overlapping_oits(oit_dictionary, merged_busy_dictionary):
         datetime(2024, 6, 4, 14, 0): datetime(2024, 6, 4, 16, 0),
         datetime(2024, 6, 4, 16, 0): datetime(2024, 6, 4, 18, 0),
     }
+    '''
 
     for start1, end1 in oit_dictionary.items():
+        added_boolean = False
         for start2, end2 in merged_busy_dictionary.items():
-            if start1 < end2 and start2 < end1:
+            if start1 == start2 and end1 == end2:
+                added_boolean = True
+            elif start1 < end2 and start2 < end1:
                 print("OIT Overlapping Times Found Between: " + str(start1) + " -> " + str(oit_dictionary[start1])
                       + " and " + str(start2) + " -> " + str(merged_busy_dictionary[start2]))
                 if start1 < start2:
@@ -173,11 +177,11 @@ def check_overlapping_oits(oit_dictionary, merged_busy_dictionary):
                 print()
 
                 available_oits[start] = end
+                added_boolean = True
 
-        # Temporary Solution
-        for start in available_oits.keys():
-            if start != start1:
-                available_oits[start1] = end1
+        if not added_boolean:
+            available_oits[start1] = end1
+
 
     '''
     for item in available_oits:

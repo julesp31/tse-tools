@@ -5,7 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8316e0a8-53d0-4017-a059-91699383bf5f" name="Changes" comment="Secondary Commit">
+      <change afterPath="$PROJECT_DIR$/printing_oits.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Available_OITs.iml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/times_comparer.py" beforeDir="false" afterPath="$PROJECT_DIR$/times_comparer.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

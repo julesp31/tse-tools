@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TSE Tools | Paradox</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://kit.fontawesome.com/f89168b549.js"></script>
+</head>
+
+<body>
+  <div class="main-box">
+    <!-- Checkbox for toggling sidebar -->
+    <input type="checkbox" id="check" />
+
+    <!-- Hamburger Button -->
+    <div class="btn-one">
+      <label for="check">
+        <i class="fas fa-bars"></i>
+      </label>
+    </div>
+
+    <!-- Sidebar Menu -->
+    <div class="sidebar-menu">
+      <!-- Logo -->
+      <div class="logo">
+        <a href="#">TSE Tools</a>
+      </div>
+
+      <!-- Close Button -->
+      <div class="btn-two">
+        <label for="check">
+          <i class="fas fa-times"></i>
+        </label>
+      </div>
+
+<!-- Menu -->
+<div>
+  <ul class="menu">
+    <li>
+      <div class="menu-item">
+        <input type="checkbox" id="dropdown-check" hidden />
+        <label for="dropdown-check" class="dropdown-label">
+          <div class="menu-header">
+            <i class="fas fa-tools menu-heading"></i>
+            <span>Formatters</span>
+            <i class="fa-solid fa-chevron-right dropdown-icon"></i>
+          </div>
+        </label>     
+        <!-- Sub Menu -->
+        <ul class="sub-menu">
+          <li class="sub-heading"><a href="#json-formatter">Open Interview Time (OIT) Formatter</a></li>
+        </ul>
+      </div>
+    </li>
+    
+    <li>
+      <div class="menu-item">
+        <input type="checkbox" id="dropdown-check2" hidden />
+        <label for="dropdown-check2" class="dropdown-label">
+          <div class="menu-header">
+            <i class="fas fa-check-circle menu-heading"></i>
+            <span>Validators</span>
+            <!-- <i class="fa-solid fa-chevron-right dropdown-icon"></i> -->
+          </div>
+        </label>
+        <ul class="sub-menu">
+          <li><a href="#">Validator 1</a></li>
+        </ul>
+      </div>
+    </li>
+
+    <li>
+      <div class="menu-item">
+        <input type="checkbox" id="dropdown-check3" hidden />
+        <label for="dropdown-check3" class="dropdown-label">
+          <div class="menu-header">
+            <i class="fas fa-exchange-alt menu-heading"></i>
+            <span>Converters</span>
+            <!-- <i class="fa-solid fa-chevron-right dropdown-icon"></i> -->
+          </div>
+        </label>
+        <ul class="sub-menu">
+          <li><a href="#">Converter 1</a></li>
+        </ul>
+      </div>
+    </li>
+
+    <li>
+      <div class="menu-item">
+        <input type="checkbox" id="dropdown-check4" hidden />
+        <label for="dropdown-check4" class="dropdown-label">
+          <div class="menu-header">
+            <i class="fas fa-lock menu-heading"></i>
+            <span>Encoders</span>
+            <!-- <i class="fa-solid fa-chevron-right dropdown-icon"></i> -->
+          </div>
+        </label>
+        <ul class="sub-menu">
+          <li><a href="#">Encoder 1</a></li>
+        </ul>
+      </div>
+    </li>
+
+    <li>
+      <div class="menu-item">
+        <input type="checkbox" id="dropdown-check5" hidden />
+        <label for="dropdown-check5" class="dropdown-label">
+          <div class="menu-header">
+            <i class="fas fa-paint-brush menu-heading"></i>
+            <span>Beautifiers</span>
+            <!-- <i class="fa-solid fa-chevron-right dropdown-icon"></i> -->
+          </div>
+        </label>
+        <ul class="sub-menu">
+          <li><a href="#">Beautifier 1</a></li>
+        </ul>
+      </div>
+    </li>
+
+    <li>
+      <div class="menu-item">
+        <input type="checkbox" id="dropdown-check6" hidden />
+        <label for="dropdown-check6" class="dropdown-label">
+          <div class="menu-header">
+            <i class="fas fa-quote-left menu-heading"></i>
+            <span>Escapers</span>
+            <!-- <i class="fa-solid fa-chevron-right dropdown-icon"></i> -->
+          </div>
+        </label>
+        <ul class="sub-menu">
+          <li><a href="#">Escaper 1</a></li>
+        </ul>
+      </div>
+    </li>
+  </ul>
+</div>
+
+      <!-- Social Media Links -->
+      <div class="social-media">
+        <ul>
+          <li><a href="https://www.facebook.com/paradoxolivia"><i class="fab fa-facebook-f"></i></a></li>
+          <li><a href="https://twitter.com/ParadoxOlivia"><i class="fab fa-x-twitter"></i></a></li>
+          <li><a href="https://www.linkedin.com/company/paradoxolivia"><i class="fab fa-linkedin-in"></i></a></li>
+          <li><a href="https://www.instagram.com/paradoxolivia"><i class="fab fa-instagram"></i></a></li>
+          <li><a href="https://vimeo.com/paradoxai"><i class="fab fa-vimeo-v"></i></a></li>
+          <li><a href="https://www.youtube.com/@paradoxolivia"><i class="fab fa-youtube"></i></a></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Hero Section -->
+    <header class="hero">
+      <div class="hero-content">
+        <h1>Open Interview Time (OIT) Formatter</h1>
+        <p>Returns the User’s OITs at the time of the Candidate’s Interview Request in the UTC timezone</p>
+      </div>
+    </header>
+
+    <!-- Text Container -->
+    <div class="text-container">
+            
+      <div class="input-area">
+        <textarea required spellcheck="false"></textarea>
+        <div class="labelline">Copy-paste your text here</div>
+      </div>
+      <div class="generate-btn-box">
+        <button id="generate-btn">
+          <span>Generate</span>
+        </button>
+      </div>      
+      <div class="output-area">
+        <textarea readonly spellcheck="false"></textarea>
+        <div class="labelline">Generated output will appear here</div>
+      </div>
+    </div>
+<script src="script.js"></script>
+</body>
+</html>

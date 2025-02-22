@@ -50,7 +50,7 @@
         </label>     
         <!-- Sub Menu -->
         <ul class="sub-menu">
-          <li class="sub-heading"><a href="#json-formatter">Open Interview Time (OIT) Formatter</a></li>
+          <li class="sub-heading"><a href="#oit-formatter">Free/Busy & Open Interview Times</a></li>
         </ul>
       </div>
     </li>
@@ -153,26 +153,25 @@
     <!-- Hero Section -->
     <header class="hero">
       <div class="hero-content">
-        <h1>Open Interview Time (OIT) Formatter</h1>
-        <p>Returns the User’s OITs at the time of the Candidate’s Interview Request in the UTC timezone</p>
+        <h1>Free/Busy & Open Interview Times Formatter</h1>
+        <p>Fetches a User's Open Interview Times (OITs) at the time the candidate's interview is requested. This considers the free/busy times we gather from a User's integrated external calendar and their Paradox availability.</p>
       </div>
     </header>
 
     <!-- Text Container -->
-    <div class="text-container">
-            
+    <div class="text-container"> 
       <div class="input-area">
         <textarea id="input-text" required spellcheck="false"></textarea>
         <div class="labelline">Copy-paste your text here</div>
       </div>
       <div class="generate-btn-box">
         <button id="generate-btn">
-          <span>Generate</span>
-        </button>
+          <div data-text="Generate" data-hover="Punch it!"></div>
+        </button>        
       </div>      
       <div class="output-area">
-        <textarea id="output-text" readonly spellcheck="false"></textarea>
-        <div class="labelline">Generated output will appear here</div>
+        <div><textarea id="output-text" readonly spellcheck="false"></textarea></div>
+        <div class="labelline">Generated output will appear here in UTC</div>
       </div>
     </div>
 <script src="{{ url_for('static', filename='js/script.js') }}"></script>

@@ -16,7 +16,6 @@ btnTwo.addEventListener('click', () => {
   heroBanner.style.marginLeft = '0px';
 });
 
-// Add click event listener to the generate button
 document.getElementById("generate-btn").addEventListener("click", function () {
   const inputText = document.getElementById("input-text").value;
 
@@ -30,8 +29,18 @@ document.getElementById("generate-btn").addEventListener("click", function () {
     .then(response => response.json())
     .then(data => {
       document.getElementById("output-text").value = JSON.stringify(data, null, 2);
+
+      // Trigger the focus event on the output textarea to move the label
+      const outputTextarea = document.getElementById("output-text");
+      outputTextarea.focus();
+
+      // Keep the label and border in the moved position
+      const outputArea = document.querySelector('.output-area');
+      outputArea.classList.add('focused');  // Add a class to indicate focus state
     })
     .catch(error => {
       console.error("Error:", error);
     });
 });
+
+

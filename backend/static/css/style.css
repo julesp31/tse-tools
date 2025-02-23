@@ -266,10 +266,13 @@ body, html {
   margin-bottom: 10px;
 }
 
-.hero p {
-  font-size: 1.13em;
+
+.hero-content p {
   color: #FFC107;
+  white-space: wrap;
+  font-size: clamp(1rem, 2vw, 1.2rem);
 }
+
 
 .text-container {
   display: flex;
@@ -281,20 +284,30 @@ body, html {
   z-index: 1;
 }
 
+.text-container {
+  position: fixed;
+  bottom: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
 .input-area, .output-area {
   position: relative;
   width: 40vw;
   max-width: 650px;
-  line-height: 60px;
+  line-height: 88px;
   text-align: center;
   margin: 0 5px;
 }
 
 .input-area textarea, .output-area textarea{
   font-family: 'Courier New', Courier, monospace;
-  height: 85vh;
-  min-height: 300px;
-  max-height: 820px;
+  height: calc(100vh - 250px);
   width: 100%;
   max-width: 650px;
   padding: 20px 10px 10px 10px;
@@ -309,13 +322,18 @@ body, html {
   resize: none;
 }
 
-.input-area .labelline, .output-area .labelline {
+.input-area .labelline,
+.output-area .labelline {
   position: absolute;
-  top: 0%; 
+  top: 0;
   left: 10%;
   font-size: 16px;
   color: #EDEDED;
-  transition: border 0.4s ease, color 0.4s ease, transform 0.4s ease;
+  background: transparent;
+  padding: 0;
+  line-height: normal;
+  transform: translate(0, 32px) scale(1);
+  transition: transform 0.4s ease, color 0.4s ease, background 0.4s ease, padding 0.4s ease, line-height 0.4s ease;
 }
 
 .output-area.focused .labelline {
@@ -344,23 +362,24 @@ body, html {
 .output-area textarea:valid + .labelline {
   color: #FFC107;
   background: rgba(0, 0, 0, 1);
-  /* height: 30px; */
-  line-height: 30px;
   padding: 0 12px;
+  line-height: 30px;
   transform: translate(-15px, -15px) scale(0.88);
-  transition: 0.4s ease;
   z-index: 1;
 }
 
 .input-area textarea:not(:focus):not(:valid) + .labelline,
 .output-area textarea:not(:focus):not(:valid) + .labelline {
-  transition: all 0.4s ease;
+  transform: none;
+  padding: 0;
+  line-height: normal;
+  background: transparent;
+  color: #EDEDED;
 }
 
 .labelline {
   pointer-events: none;
 }
-
 
  textarea::-webkit-scrollbar {
   width: 0.8em;
@@ -401,18 +420,31 @@ textarea::-webkit-scrollbar-corner {
   border-radius: 10px;
   cursor: pointer;
   transition: 0.6s all ease;
-  font-size: clamp(0.4rem, 1.3vw, 1.3rem); 
+  /* font-size: clamp(0.4rem, 1.3vw, 1.3rem); */
+  font-size: clamp(1rem, 2vw, 1.2rem);
   overflow: hidden;
   text-align: center;
 }
 
 #generate-btn:hover {
   background-color: #EDEDED;
-  font-size: clamp(0.4rem, 1.4vw, 1.4rem);
+  font-size: clamp(1rem, 2vw, 1.2rem);
   color:#141416;
   border: 2px solid #FFC107;
   transform: scale(1.05);
   transition: 0.6s all ease; 
+}
+
+.btn-content {
+  transition: font-size 0.6s ease;
+  font-size: 1.3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#generate-btn:hover .btn-content {
+  font-size: 1.5rem;
 }
 
 #generate-btn::before {
@@ -422,7 +454,7 @@ textarea::-webkit-scrollbar-corner {
   left: 50%;
   right: 50%;
   bottom: 0;
-  background-color: #FAFAFA;
+  background-color: #EDEDED;
   opacity: 0;
   z-index: -1;
   transition: 0.6s all ease;
@@ -448,6 +480,167 @@ textarea::-webkit-scrollbar-corner {
   content: attr(data-hover);
 }
 
+.CodeMirror {
+  height: calc(100vh - 250px) !important;
+  border: 1px solid #EDEDED;
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.6) !important;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 1em;
+  line-height: 2;
+}
+
+.CodeMirror {
+  padding-top: 1.5em !important;
+}
+   
+.CodeMirror-lines {
+  text-align: left !important;
+}
+
+.input-area.focused .CodeMirror,
+.output-area.focused .CodeMirror {
+  border: 2px solid #FFC107 !important;
+}
+
+.input-area.focused .labelline,
+.output-area.focused .labelline {
+  color: #FFC107;
+  background: rgba(0, 0, 0, 1);
+  line-height: 30px;
+  padding: 0 12px;
+  transform: translate(-15px, -15px) scale(0.88);
+  transition: 0.4s ease;
+  z-index: 1;
+}
+
+.CodeMirror,
+.CodeMirror-gutters,
+.CodeMirror-gutter-filler {
+  background-color: rgba(0, 0, 0, 0.6) !important;
+}
+
+.CodeMirror-gutters {
+  border: none !important;
+}
+
+.CodeMirror-linenumbers {
+  background: none !important;
+}
+
+.CodeMirror-scroll::-webkit-scrollbar {
+  width: 0.8em;
+  cursor: pointer;
+}
+.CodeMirror-scroll::-webkit-scrollbar-track {
+  display: none;
+  cursor: pointer;
+}
+.CodeMirror-scroll::-webkit-scrollbar-thumb {
+  background-color: rgba(158, 106, 0, 0.6) !important;
+  border-radius: 10px;
+  border: 3px solid transparent;
+  cursor: grab;
+  background-clip: padding-box;
+}
+.CodeMirror-scroll::-webkit-scrollbar-corner {
+  border-radius: 10px;
+  border: 1px solid transparent;
+}
+
+/* Prevent the overlay scrollbar container and corner from blocking pointer events */
+.CodeMirror-overlayscroll-vertical,
+.CodeMirror-overlayscroll-horizontal,
+.CodeMirror-scrollbar-filler {
+  pointer-events: none;
+}
+
+/* Allow pointer events on the thumb so you can still drag it */
+.CodeMirror-overlayscroll-vertical div,
+.CodeMirror-overlayscroll-horizontal div {
+  pointer-events: auto;
+}
+
+/* Gold, Black, Dark Grey, and White Theme Overrides for material-darker */
+
+.cm-s-material-darker .cm-keyword {
+  color: #FFD700 !important;  /* Gold for keywords */
+}
+
+.cm-s-material-darker .cm-operator {
+  color: #ffffff !important;  /* White for operators */
+}
+
+.cm-s-material-darker .cm-variable-2 {
+  color: #ffffff !important;  /* White for certain variables */
+}
+
+.cm-s-material-darker .cm-variable-3,
+.cm-s-material-darker .cm-type {
+  color: #d3d3d3 !important;  /* Light grey for types */
+}
+
+.cm-s-material-darker .cm-builtin {
+  color: #FFD700 !important;  /* Gold for built-in functions */
+}
+
+.cm-s-material-darker .cm-atom {
+  color: #FFD700 !important;  /* Gold for atoms */
+}
+
+.cm-s-material-darker .cm-number {
+  color: #FFD700 !important;  /* Gold for numbers */
+}
+
+.cm-s-material-darker .cm-def {
+  color: #ffffff !important;  /* White for definitions */
+}
+
+.cm-s-material-darker .cm-string {
+  color: #ffffff !important;  /* White for strings */
+}
+
+.cm-s-material-darker .cm-string-2 {
+  color: #ffffff !important;  /* White for alternate strings */
+}
+
+.cm-s-material-darker .cm-comment {
+  color: #666666 !important;  /* Dark grey for comments */
+}
+
+.cm-s-material-darker .cm-variable {
+  color: #ffffff !important;  /* White for variables */
+}
+
+.cm-s-material-darker .cm-tag {
+  color: #FFD700 !important;  /* Gold for tags */
+}
+
+.cm-s-material-darker .cm-meta {
+  color: #FFD700 !important;  /* Gold for meta info */
+}
+
+.cm-s-material-darker .cm-attribute {
+  color: #FFD700 !important;  /* Gold for attributes */
+}
+
+.cm-s-material-darker .cm-property {
+  color: #FFD700 !important;  /* Gold for properties */
+}
+
+.cm-s-material-darker .cm-qualifier {
+  color: #d3d3d3 !important;  /* Light grey for qualifiers */
+}
+
+.cm-s-material-darker .cm-error {
+  color: #ffffff !important;
+  background-color: #FF5370 !important;
+}
+
+.cm-s-material-darker .CodeMirror-matchingbracket {
+  text-decoration: underline;
+  color: #ffffff !important;
+}
 
 @media (max-width: 1530px) and (max-height: 1300px) {
   .input-area textarea, .output-area textarea {

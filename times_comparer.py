@@ -2,6 +2,18 @@ from _datetime import datetime
 import re
 
 
+def merge_time_ranges(ranges):
+    intervals = sorted(ranges.items(), key=lambda x: x[0])
+
+    merged = []
+    for start, end in intervals:
+        if not merged or start > merged[-1][1]:
+            merged.append((start, end))
+        else:
+            merged[-1] = (merged[-1][0], max (merged[-1][1], end))
+
+    return {start: end for start, end in merged}
+
 def combine_dict(my_dict):
     slots_list = []
     current_str = ""
@@ -92,75 +104,14 @@ def merge_busy_dict(busy_dictionary, scheduled_dictionary):
             merged_dictionaries[start2] = end2
         merged_dictionaries[start1] = end1
 
-    '''
-    for item in merged_dictionaries:
-        print(str(item) + " -> " + str(merged_dictionaries[item]))
-    print()
-    '''
-
     return merged_dictionaries
-
-
-'''
-def check_overlap(oit_dict, busy_dict):
-    oit_dict = {
-        datetime(2024, 6, 4, 8, 0) : datetime(2024, 6, 4, 10, 0),
-        datetime(2024, 6, 4, 12, 0) : datetime(2024, 6, 4, 14, 0),
-        datetime(2024, 6, 4, 16, 0): datetime(2024, 6, 4, 18, 0),
-    }
-
-    busy_dict = {
-        datetime(2024, 6, 4, 9, 0): datetime(2024, 6, 4, 11, 0),
-        datetime(2024, 6, 4, 14, 0): datetime(2024, 6, 4, 16, 0),
-    }
-
-    dict_to_remove = []
-    for start1, end1 in oit_dict.items():
-        for start2, end2 in busy_dict.items():
-            if start1 < end2 and start2 < end1:
-                # print(f"Overlap found between ({start1}, {end1}) and ({start2}, {end2})")
-                dict_to_remove.append(start1)
-
-    for element in dict_to_remove:
-        if oit_dict.__contains__(element):
-            oit_dict.pop(element)
-
-    return oit_dict
-'''
 
 
 def check_overlapping_oits(oit_dictionary, merged_busy_dictionary):
     available_oits = {}
+    oit_dictionary = merge_time_ranges(oit_dictionary)
+    merged_busy_dictionary = merge_time_ranges(merged_busy_dictionary)
 
-    '''
-    # Testing for future improvements -> After merging times it the new busy_time could overlap
-    # with a time already placed in merged_dictionary -- currently no check
-    
-
-    oit_dictionary = {
-        datetime(2024, 6, 4, 8, 0): datetime(2024, 6, 4, 12, 0),
-        datetime(2024, 6, 4, 13, 0): datetime(2024, 6, 4, 14, 0),
-        datetime(2024, 6, 4, 17, 30): datetime(2024, 6, 4, 18, 30),
-    }
-
-    merged_busy_dictionary = {
-        datetime(2024, 6, 4, 9, 0): datetime(2024, 6, 4, 11, 0),
-        datetime(2024, 6, 4, 14, 0): datetime(2024, 6, 4, 16, 0),
-        datetime(2024, 6, 4, 16, 0): datetime(2024, 6, 4, 18, 0),
-    }
-
-    print(" -- OIT Dictionary --")
-    it = 1
-    for start1, end1 in oit_dictionary.items():
-        print(str(it) + str(start1) + " -> " + str(oit_dictionary[start1]))
-    print()
-
-    print(" -- Busy Dictionary --")
-    it = 1
-    for start1, end1 in merged_busy_dictionary.items():
-        print(str(it) + str(start1) + " -> " + str(merged_busy_dictionary[start1]))
-    print()
-    '''
 
     print(" -- OIT Overlapping Times -- ")
     print()

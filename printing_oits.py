@@ -1,4 +1,4 @@
-
+from datetime import datetime
 
 def removing_excess_times(available_oits):
     simplified_oits = []
@@ -27,3 +27,15 @@ def removing_excess_times(available_oits):
 
     print(simplified_oits)
 
+
+def merge_excess_times(available_oits):
+    intervals = sorted(available_oits.items(), key=lambda x: x[0])
+
+    merged = []
+    for start, end in intervals:
+        if not merged or start > merged[-1][1]:
+            merged.append((start, end))
+        else:
+            merged[-1] = (merged[-1][0], max(merged[-1][1], end))
+
+    return {start: end for start, end in merged}

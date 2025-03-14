@@ -1,23 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
   <title>TSE Tools | Paradox</title>
 
-  <!-- CodeMirror -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/codemirror.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/theme/material-darker.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/addon/scroll/simplescrollbars.min.css">
-  
+  <!-- Monaco Editor -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.39.0/min/vs/loader.js"></script>
   <!-- FontAwesome -->
   <script src="https://kit.fontawesome.com/f89168b549.js"></script>
   <!-- JSON5 -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/json5/2.2.1/index.min.js"></script>
-
-  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+  <!-- Styles -->
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}" />
 </head>
-
 <body>
   <div class="main-box">
     <!-- Checkbox for toggling sidebar -->
@@ -56,10 +52,14 @@
                   <span>Formatters</span>
                   <i class="fa-solid fa-chevron-right dropdown-icon"></i>
                 </div>
-              </label>     
+              </label>
               <!-- Sub Menu -->
               <ul class="sub-menu">
-                <li class="sub-heading"><a href="#oit-formatter">Free/Busy & Open Interview Times</a></li>
+                <li class="sub-heading">
+                  <a href="#oit-formatter">
+                    <span class="sub-heading-text">Open Interview Times</span>
+                  </a>
+                </li>
               </ul>
             </div>
           </li>
@@ -157,37 +157,37 @@
     <!-- Hero Section -->
     <header class="hero">
       <div class="hero-content">
-        <h1>Free/Busy & Open Interview Times Formatter</h1>
-        <p>Fetches a User's Open Interview Times (OITs) at the time the candidate's interview is requested.
-          <br>This considers the free/busy times we gather from a User's integrated external calendar and their Paradox availability.</p>
+        <h1>Open Interview Times Formatter</h1>
+        <p>
+          Fetches a User's Open Interview Times (OITs) at the time the candidate's interview is requested.
+          <br />
+          This considers the free/busy times we gather from a User's integrated external calendar and their Paradox availability.
+        </p>
       </div>
     </header>
 
     <!-- Text Container -->
-    <div class="text-container"> 
+    <div class="text-container">
       <!-- Input -->
       <div class="input-area">
-        <textarea id="input-text" required spellcheck="false"></textarea>
+        <div id="input-text" class="editor-container"></div>
         <div class="labelline">Copy-paste your text here</div>
       </div>
 
       <div class="generate-btn-box">
         <button id="generate-btn">
           <div class="btn-content" data-text="Generate" data-hover="Punch it!"></div>
-        </button>     
-      </div>  
+        </button>
+      </div>
 
       <!-- Output -->
       <div class="output-area">
-        <textarea id="output-text" readonly spellcheck="false"></textarea>
+        <div id="output-text" class="editor-container"></div>
         <div class="labelline">Generated output will appear here in UTC</div>
       </div>
     </div>
   </div>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/codemirror.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/mode/javascript/javascript.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/addon/scroll/simplescrollbars.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/json5/2.2.1/index.min.js"></script>
   <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>

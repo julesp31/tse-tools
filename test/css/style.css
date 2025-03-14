@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Playfair:ital,opsz,wght@0,5..1200,300..900;1,5..1200,300..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Playfair:ital,opsz,wght@0,5..1200,300..900;1,5..1200,300..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap");
 *,
 *::before,
 *::after {
@@ -17,7 +17,7 @@ body, html {
   width: 100%;
   height: 100%;
   display: flex;
-  background: url("../background.png") right no-repeat;
+  background: url("../images/background.png") right no-repeat;
   background-size: cover;
   justify-content: center;
   align-items: center;
@@ -256,8 +256,8 @@ body, html {
   background-color: rgba(0, 0, 0, 0.3);
   color: #EDEDED;
   text-align: center;
-  padding: 15px 45px;
-  margin-bottom: 40px;
+  padding: 15px 40px;
+  margin-bottom: 35px;
   transition: margin-left 0.3s linear;
 }
 
@@ -266,11 +266,13 @@ body, html {
   margin-bottom: 10px;
 }
 
-.hero p {
-  font-size: 1.2em;
-  /* color: #FFC107; */
+
+.hero-content p {
   color: #FFC107;
+  white-space: wrap;
+  font-size: clamp(1rem, 2vw, 1.2rem);
 }
+
 
 .text-container {
   display: flex;
@@ -282,18 +284,30 @@ body, html {
   z-index: 1;
 }
 
+.text-container {
+  position: fixed;
+  bottom: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
 .input-area, .output-area {
   position: relative;
-  width: 35vw;
+  width: 40vw;
   max-width: 650px;
-  line-height: 60px;
+  line-height: 88px;
   text-align: center;
   margin: 0 5px;
 }
 
 .input-area textarea, .output-area textarea{
   font-family: 'Courier New', Courier, monospace;
-  height: 70vh;
+  height: calc(100vh - 250px);
   width: 100%;
   max-width: 650px;
   padding: 20px 10px 10px 10px;
@@ -305,22 +319,41 @@ body, html {
   background: rgba(0, 0, 0, 0.6);
   color: #EDEDED;
   transition: 0.4s ease;
+  resize: none;
 }
 
-.input-area .labelline, .output-area .labelline {
+.input-area .labelline,
+.output-area .labelline {
   position: absolute;
-  top: 0%; 
+  top: 0;
   left: 10%;
   font-size: 16px;
   color: #EDEDED;
-  transition: border 0.4s ease, color 0.4s ease, transform 0.4s ease;
+  background: transparent;
+  padding: 0;
+  line-height: normal;
+  transform: translate(0, 50px) scale(1);
+  transition: transform 0.4s ease, color 0.4s ease, background 0.4s ease, padding 0.4s ease, line-height 0.4s ease;
+}
+
+.output-area.focused .labelline {
+  color: #FFC107;
+  background: rgba(0, 0, 0, 1);
+  line-height: 30px;
+  padding: 0 12px;
+  transform: translate(-15px, -15px) scale(0.88);
+  transition: 0.4s ease;
+}
+
+.output-area.focused textarea {
+  border: 2px solid #FFC107;
 }
 
 .input-area textarea:focus, .input-area textarea:valid,
 .output-area textarea:focus, .output-area textarea:valid {
   color: #EDEDED;
   border: 2px solid #FFC107;
-  transition: border 0.4s linear, color 0.4s linear;
+  transition: color 0.4s linear;
 }
 
 .input-area textarea:focus + .labelline,
@@ -329,21 +362,46 @@ body, html {
 .output-area textarea:valid + .labelline {
   color: #FFC107;
   background: rgba(0, 0, 0, 1);
-  height: 30px;
-  line-height: 30px;
   padding: 0 12px;
+  line-height: 30px;
   transform: translate(-15px, -15px) scale(0.88);
-  transition: 0.4s ease;
   z-index: 1;
 }
 
 .input-area textarea:not(:focus):not(:valid) + .labelline,
 .output-area textarea:not(:focus):not(:valid) + .labelline {
-  transition: all 0.4s ease;
+  transform: none;
+  padding: 0;
+  line-height: normal;
+  background: transparent;
+  color: #EDEDED;
 }
 
 .labelline {
   pointer-events: none;
+}
+
+ textarea::-webkit-scrollbar {
+  width: 0.8em;
+  cursor: pointer;
+} 
+
+ textarea::-webkit-scrollbar-track {
+  display: none;
+  cursor: pointer;
+}
+
+textarea::-webkit-scrollbar-thumb {
+  background-color: rgba(158, 106, 0, 0.6);
+  border-radius: 10px;
+  border: 3px solid transparent;
+  cursor: grab;
+  background-clip: padding-box;
+}
+
+textarea::-webkit-scrollbar-corner {
+  border-radius: 10px;
+  border: 1px solid transparent;
 }
 
 .generate-btn-box {
@@ -352,40 +410,88 @@ body, html {
 }
 
 #generate-btn {
-  width: 10vw; 
+  width: 8vw; 
   max-width: 150px;
-  min-height: 8vh; 
-  max-height: 200px; 
+  min-height: 8vh;
   padding: 5px; 
   background-color: #141416;
   color: #FFC107;
   border: 1.5px solid #EDEDED;
   border-radius: 10px;
   cursor: pointer;
-  transition: all 0.6s ease;
-  font-size: clamp(0.4rem, 1.3vw, 1.3rem); 
+  transition: 0.6s all ease;
+  /* font-size: clamp(0.4rem, 1.3vw, 1.3rem); */
+  font-size: clamp(1rem, 2vw, 1.2rem);
   overflow: hidden;
   text-align: center;
 }
 
 #generate-btn:hover {
-  background-color: #FFC107;
-  font-size: clamp(0.4rem, 1.4vw, 1.4rem);
+  background-color: #EDEDED;
+  font-size: clamp(1rem, 2vw, 1.2rem);
   color:#141416;
-  border-color: #FFC107;
-  /* transform: scale(1.05); */
-  transition: all 0.6s ease; 
+  border: 2px solid #FFC107;
+  transform: scale(1.05);
+  transition: 0.6s all ease; 
 }
 
-#generate-btn span {
+.btn-content {
+  transition: font-size 0.6s ease;
+  font-size: 1.3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#generate-btn:hover .btn-content {
+  font-size: 1.5rem;
+}
+
+#generate-btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  right: 50%;
+  bottom: 0;
+  background-color: #EDEDED;
+  opacity: 0;
+  z-index: -1;
+  transition: 0.6s all ease;
+}
+
+#generate-btn:hover::before {
+  left: 0;
+  right: 0;
+  opacity: 1;
+  transition: 0.6s all ease;
+}
+
+#generate-btn div {
   width: 100%;
   word-break: break-word;
 }
 
-/* For large screens (e.g., desktops and widescreens)
-@media screen and (min-width: 1440px) {
-  .input-area textarea,
-  .output-area textarea {
-    height: 75vh;
-  }
-} */
+#generate-btn div::before {
+  content: attr(data-text);
+}
+
+#generate-btn:hover div::before {
+  content: attr(data-hover);
+}
+
+.input-area.focused,
+.output-area.focused {
+  border: 2px solid #FFC107 !important;
+}
+
+.input-area.focused .labelline,
+.output-area.focused .labelline {
+  color: #FFC107;
+  background: rgba(0, 0, 0, 1);
+  line-height: 30px;
+  padding: 0 12px;
+  transform: translate(-15px, -15px) scale(0.88);
+  transition: 0.4s ease;
+  z-index: 1;
+}

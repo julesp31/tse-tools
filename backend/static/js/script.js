@@ -87,16 +87,16 @@ window.addEventListener("load", function () {
       })
       .then(response => response.json())
       .then(data => {
-        const jsonOutput = JSON.stringify(data, null, 2);
-        outputEditor.setValue(jsonOutput);
-        if (jsonOutput.trim() !== "") {
+        // Use the printing_times property directly, which is already a formatted multi-line string.
+        outputEditor.setValue(data.printing_times);
+        if (data.printing_times.trim() !== "") {
           document.querySelector(".output-area").classList.add("focused");
           document.querySelector(".output-area .editor-container").classList.add("has-content");
         } else {
           document.querySelector(".output-area").classList.remove("focused");
           document.querySelector(".output-area .editor-container").classList.remove("has-content");
         }
-      })
+      })      
       .catch(error => {
         console.error("Error:", error);
       });

@@ -34,10 +34,6 @@
    width: 100%;
  }
  
- .text-container {
-   transition: left 0.4s ease, transform 0.4s ease;
- }
- 
  /***************************************************************
   * 3. Sidebar Menu Base Styles
   ***************************************************************/
@@ -292,63 +288,71 @@
   * 9. Hero Section
   ***************************************************************/
   .hero {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
     background-color: rgba(0, 0, 0, 0.3);
     color: #EDEDED;
     text-align: center;
     padding: 15px 40px;
     margin-bottom: 35px;
-    transition: margin-left 0.4s linear;
+    transition: left 0.4s linear, transform 0.4s linear, font-size 0.4s linear;
   }
  
- .hero h1 {
-   font-size: 2em;
-   margin-bottom: 10px;
- }
- 
- .hero-content p {
-   color: #FFC107;
-   white-space: wrap;
-   font-size: clamp(1rem, 2vw, 1.2rem);
- }
- 
  .hero.nav-open {
-   margin-left: 240px;
+   left: calc(50% + 220px);
+   transform: translateX(-50%);
+ }
+ 
+ .hero h1 {
+  font-size: 2em;
+  margin-bottom: 10px;
+  transition: font-size 0.4s linear;
+  }
+
+.hero-content p {
+  color: #FFC107;
+  white-space: wrap;
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  transition: font-size 0.4s linear;
  }
  
  /***************************************************************
   * 10. Text Container & Editor Areas
   ***************************************************************/
- .text-container {
-   display: flex;
-   flex-wrap: nowrap;
-   height: auto;
-   align-items: center;
-   justify-content: center;
-   margin-top: 20px;
-   z-index: 1;
-   position: fixed;
-   bottom: 50px;
-   left: 50%;
-   transform: translateX(-50%);
-   transition: left 0.4s ease, transform 0.4s ease;
- }
+  .text-container {
+    position: fixed;
+    width: 90%;
+    bottom: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: left 0.4s linear, transform 0.4s linear;
+    height: auto;
+    margin-top: 20px;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
  
- /* When nav is open, shift the text container right by 60px */
  .text-container.nav-open {
-   left: calc(50% + 60px);
+   left: calc(50% + 220px);
    transform: translateX(-50%);
  }
  
- .input-area, .output-area {
+ .input-area, 
+ .output-area {
    position: relative;
    width: 40vw;
-   max-width: 650px;
+   /* max-width: 650px; */
    line-height: 88px;
    text-align: center;
    margin: 0 5px;
+   transition: width 0.4s linear;
  }
  
- .input-area .editor-container, .output-area .editor-container {
+ .input-area .editor-container, 
+ .output-area .editor-container {
    font-family: 'Courier New', Courier, monospace;
    height: calc(100vh - 250px);
    width: 100%;
@@ -510,4 +514,34 @@
  #generate-btn:hover div::before {
    content: attr(data-hover);
  }
- 
+
+ @media only screen and (min-width: 1024px) and (max-width: 1440px) {
+  
+
+  .hero.nav-open {
+    left: calc(50% + 120px);
+    transform: translateX(-50%);
+  }
+
+  .hero.nav-open h1 {
+    font-size: 2em;
+  }
+  .hero.nav-open .hero-content p {
+    font-size: clamp(1rem, 1vw, 2rem);
+  }
+  
+  .text-container.nav-open {
+    left: calc(50% + 120px);
+    transform: translateX(-50%);
+  }
+
+  .text-container.nav-open .input-area,
+  .text-container.nav-open .output-area {
+    width: 30vw;
+  }
+
+  .text-container.nav-open .input-area .editor-container,
+  .text-container.nav-open .output-area .editor-container {
+    transition: width 0.4s linear;
+  }
+}

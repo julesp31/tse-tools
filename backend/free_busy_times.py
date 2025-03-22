@@ -1,5 +1,3 @@
-
-
 def get_busy_list(athena_query):
     list_of_words = athena_query.split()
     starting_word = "free_busy_data"

@@ -1,5 +1,3 @@
-
-
 def get_scheduled_list(athena_query):
     list_of_words = athena_query.split()
     starting_word = "scheduled_times"

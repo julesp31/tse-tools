@@ -144,7 +144,7 @@ def check_overlapping_oits(oit_dictionary, merged_busy_dictionary):
                 available_oits[second_start] = second_end
                 added_boolean = True
 
-            elif start1 < end2 and start2 < end1:
+            elif start1 < start2 and end1 < end2 and start1 < end2 and start2 < end1:
                 print("OIT Overlapping Times Found Between: " + str(start1) + " -> " + str(oit_dictionary[start1])
                       + " and " + str(start2) + " -> " + str(merged_busy_dictionary[start2]))
                 if start1 < start2:

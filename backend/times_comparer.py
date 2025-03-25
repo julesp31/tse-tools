@@ -14,6 +14,8 @@ def merge_time_ranges(ranges):
 
     return {start: end for start, end in merged}
 
+# commit test
+
 def combine_dict(my_dict):
     slots_list = []
     current_str = ""

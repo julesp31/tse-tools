@@ -69,10 +69,10 @@ def get_busy_times(blocks):
     block_iterator = 0
     for block in blocks:
         block_iterator += 1
-        ending_word = 'End'
+        ending_word = 'end'
         ending_time = ""
         ending_boolean = False
-        starting_word = 'Start'
+        starting_word = 'start'
         starting_time = ""
         starting_boolean = False
         time_list = {}
@@ -80,7 +80,8 @@ def get_busy_times(blocks):
         iterator = 0
 
         for word in block:
-
+            word = word.lower()
+            
             if ending_word in word or starting_word in word:
                 time_boolean = True
             if time_boolean:

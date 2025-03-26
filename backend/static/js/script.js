@@ -1,9 +1,14 @@
+// script.js
+
 window.addEventListener("load", function () {
   require.config({
     paths: { vs: "https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.39.0/min/vs" }
   });
 
   require(["vs/editor/editor.main"], function () {
+    // Disable JSON validation in Monaco
+    monaco.languages.json.jsonDefaults.setDiagnosticsOptions({ validate: false });
+
     // Initialize Monaco Editor for Input
     var inputEditor = monaco.editor.create(document.getElementById("input-text"), {
       value: "",
@@ -18,7 +23,7 @@ window.addEventListener("load", function () {
       wordWrap: "on"
     });
 
-    // Initialize Monaco Editor for Output (Read-Only)
+    // Initialize Monaco Editor for Output
     var outputEditor = monaco.editor.create(document.getElementById("output-text"), {
       value: "",
       language: "json",
@@ -33,8 +38,7 @@ window.addEventListener("load", function () {
       wordWrap: "on"
     });
 
-    // When text is pasted into the input editor,
-    // format it and add a "focused" state if non-empty.
+    // Format on paste in the input editor
     inputEditor.onDidPaste(() => {
       try {
         let raw = inputEditor.getValue();
@@ -49,7 +53,7 @@ window.addEventListener("load", function () {
       }
     });
 
-    // Focus and blur events for the input editor.
+    // Focus/blur events
     inputEditor.onDidFocusEditorText(() => {
       document.querySelector(".input-area").classList.add("focused");
       document.querySelector(".input-area .editor-container").classList.add("has-content");
@@ -61,23 +65,20 @@ window.addEventListener("load", function () {
       }
     });
 
-    // Sidebar toggle logic: toggle nav-open class on hero and text container
-    const textContainer = document.querySelector('.text-container');
-    const heroBanner = document.querySelector('.hero');
+    // Grab references for sidebar toggle
+    const mainBox = document.querySelector('.main-box');
     const btnOne = document.querySelector('.btn-one');
     const btnTwo = document.querySelector('.btn-two');
 
+    // Toggle .nav-open on the .main-box instead of .text-container/.hero
     btnOne.addEventListener('click', () => {
-      textContainer.classList.add('nav-open');
-      heroBanner.classList.add('nav-open');
+      mainBox.classList.add('nav-open');
     });
     btnTwo.addEventListener('click', () => {
-      textContainer.classList.remove('nav-open');
-      heroBanner.classList.remove('nav-open');
+      mainBox.classList.remove('nav-open');
     });
 
-    // Handle Generate Button Click:
-    // Populate output editor and toggle focused state on output-area.
+    // "Generate" button logic
     document.getElementById("generate-btn").addEventListener("click", function () {
       const inputVal = inputEditor.getValue();
       fetch("/process", {
@@ -87,7 +88,6 @@ window.addEventListener("load", function () {
       })
       .then(response => response.json())
       .then(data => {
-        // Use the printing_times property directly, which is already a formatted multi-line string.
         outputEditor.setValue(data.printing_times);
         if (data.printing_times.trim() !== "") {
           document.querySelector(".output-area").classList.add("focused");
@@ -96,7 +96,7 @@ window.addEventListener("load", function () {
           document.querySelector(".output-area").classList.remove("focused");
           document.querySelector(".output-area .editor-container").classList.remove("has-content");
         }
-      })      
+      })
       .catch(error => {
         console.error("Error:", error);
       });

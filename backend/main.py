@@ -1,9 +1,9 @@
 from flask import Flask, request, render_template, jsonify
-from free_busy_times import get_busy_list
-from oit_slots import get_oit_list
-from times_comparer import split_days
-from scheduled_times import get_scheduled_list
-from printing_oits import merge_excess_times
+from backend.free_busy_times import get_busy_list
+from backend.oit_slots import get_oit_list
+from backend.times_comparer import split_days
+from backend.scheduled_times import get_scheduled_list
+from backend.printing_oits import merge_excess_times
 
 app = Flask(__name__, static_folder='static', template_folder='templates')
 

@@ -5,7 +5,7 @@ from times_comparer import split_days
 from scheduled_times import get_scheduled_list
 from printing_oits import merge_excess_times
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='static', template_folder='templates')
 
 def main(athena_query):
     # Get busy, OIT, and scheduled times from the query

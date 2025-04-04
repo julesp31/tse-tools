@@ -1,548 +1,609 @@
 /***************************************************************
- * 1. Imports & Global Resets
- ***************************************************************/
- @import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Playfair:ital,opsz,wght@0,5..1200,300..900;1,5..1200,300..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap");
+* 1. Imports & Global Resets
+***************************************************************/
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Playfair:ital,opsz,wght@0,5..1200,300..900;1,5..1200,300..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap");
 
- *,
- *::before,
- *::after {
-   box-sizing: border-box;
- }
- 
- * {
-   margin: 0;
-   padding: 0;
- }
- 
- /***************************************************************
-  * 2. Global Layout & Typography
-  ***************************************************************/
- body, html {
-   font-family: "Poppins", sans-serif;
-   width: 100%;
-   height: 100%;
-   display: flex;
-   background: url("../images/background.png") right no-repeat;
-   background-size: cover;
-   justify-content: center;
-   align-items: center;
-   overflow-x: hidden;
- }
- 
- .main-box {
-   height: 100vh;
-   width: 100%;
- }
- 
- /***************************************************************
-  * 3. Sidebar Menu Base Styles
-  ***************************************************************/
- .main-box .sidebar-menu {
-   position: fixed;
-   height: 100vh;
-   width: 240px;
-   left: -240px;
-   background: rgba(0, 0, 0, 0.6);
-   box-shadow: 0px 0px 6px rgba(255, 255, 255, 0.5);
-   overflow: hidden;
-   transition: all 0.4s linear;
-   z-index: 99;
- }
- 
- .sidebar-menu .logo {
-   position: absolute;
-   width: 100%;
-   height: 60px;
-   box-shadow: 0px 2px 4px rgba(255, 255, 255, 0.5);
- }
- 
- .sidebar-menu .logo a {
-   color: #EDEDED;
-   font-size: 22px;
-   font-weight: 500;
-   position: absolute;
-   left: 20px;
-   line-height: 60px;
-   text-decoration: none;
- }
- 
- /***************************************************************
-  * 4. Sidebar Menu - Main Menu Items
-  ***************************************************************/
- .sidebar-menu .menu {
-   position: absolute;
-   top: 80px;
-   width: 100%;
- }
- 
- .sidebar-menu .menu li {
-   margin-top: 6px;
-   padding: 0;
-   position: relative;
-   list-style: none;
- }
- 
- .menu-header {
-   display: block;
-   padding: 14px 20px;
- }
- 
- .menu-item .dropdown-label {
-   display: block;
-   width: 100%;
-   height: 100%;
- }
- 
- .dropdown-label {
-   align-items: center;
-   cursor: pointer;
-   color: #EDEDED;
-   font-size: 16px;
-   text-decoration: none;
-   transition: transform 0.4s ease;
- }
- 
- .dropdown-label .dropdown-icon {
-   font-size: 24px;
-   color: #EDEDED;
-   margin-top: 4px;
-   float: right;
-   cursor: pointer;
-   transition: transform 0.4s ease;
-   flex-grow: 1;
- }
- 
- .sidebar-menu .menu i {
-   color: #EDEDED;
-   font-size: 16px;
-   padding-right: 8px;
- }
- 
- .sidebar-menu .menu a {
-   color: #EDEDED;
-   font-size: 16px;
-   text-decoration: none;
- }
- 
- /***************************************************************
-  * 5. Sidebar Menu - Sub-menu & Sub-heading
-  ***************************************************************/
- .sidebar-menu .sub-menu {
-   max-height: 0;
-   overflow: hidden;
-   opacity: 0;
-   transition: max-height 0.4s ease, opacity 0.3s ease;
- }
- 
- #dropdown-check:checked ~ .sub-menu {
-   max-height: 200px;
-   transition: 0.8s ease;
-   opacity: 1;
- }
- 
- .sidebar-menu .menu .sub-menu li.sub-heading {
-   margin-top: 6px;
-   padding: 0;
-   display: block;
- }
- 
- .sidebar-menu .menu .sub-menu li.sub-heading a .sub-heading-text {
-   display: block;
-   padding: 14px 20px;
- }
- 
- /***************************************************************
-  * 6. Hover Effects for Menu Items
-  ***************************************************************/
- .sidebar-menu .menu li:hover {
-   border-left: 1px solid #EDEDED;
-   box-shadow: 0 0 4px rgba(255, 255, 255, 0.5);
- }
- 
- .sidebar-menu .menu .sub-menu li.sub-heading:hover {
-   border-left: 1px solid #EDEDED;
- }
- 
- .sidebar-menu .menu .sub-menu li.sub-heading:hover a .sub-heading-text {
-   color: #FFC107;
-   transition: color 0.4s ease;
- }
- 
- .dropdown-icon:hover,
- .dropdown-label:hover {
-   color: #FFC107;
-   transition: color 0.4s ease;
- }
- 
- .dropdown-label:hover .dropdown-icon {
-   color: #EDEDED;
-   transition: color 0.4s ease;
- }
- 
- .sidebar-menu .menu li:hover .menu-header span,
- .sidebar-menu .menu li:hover .menu-header i {
-   color: #FFC107;
-   transition: color 0.4s ease;
- }
- 
- /***************************************************************
-  * 7. Sidebar Social Media Links
-  ***************************************************************/
- .sidebar-menu .social-media {
-   position: absolute;
-   left: 50%;
-   bottom: 20px;
-   transform: translateX(-50%);
-   list-style: none;
-   cursor: pointer;
- }
- 
- .sidebar-menu .social-media ul {
-   display: flex;
-   padding: 0;
-   margin: 0;
-   list-style: none;
- }
- 
- .sidebar-menu .social-media i {
-   padding: 0 10px;
-   color: #EDEDED;
-   opacity: 0.6;
-   font-size: 18px;
-   text-decoration: none;
- }
- 
- .sidebar-menu .social-media i:hover {
-   opacity: 1;
-   transition: all 0.3s linear;
-   transform: scale(1.01);
- }
- 
- /***************************************************************
-  * 8. Toggle Buttons (Hamburger & Close)
-  ***************************************************************/
- #check {
-   display: none;
- }
- 
- .main-box .btn-one i {
-   color: #EDEDED;
-   font-size: 30px;
-   font-weight: 700;
-   position: absolute;
-   left: 16px;
-   line-height: 60px;
-   cursor: pointer;
-   opacity: 1;
-   transition: 0.3s linear;
-   z-index: 100;
- }
- 
- .sidebar-menu .btn-two i {
-   font-size: 30px;
-   line-height: 60px;
-   position: absolute;
-   left: 205px;
-   cursor: pointer;
-   opacity: 0;
-   color: #EDEDED;
-   transition: 0.3s linear;
- }
- 
- .btn-one i:hover {
-   font-size: 36px;
- }
- 
- .btn-two i:hover {
-   font-size: 36px;
- }
- 
- #check:checked ~ .sidebar-menu {
-   left: 0;
- }
- 
- #dropdown-check:checked ~ .sub-menu {
-   max-height: 200px;
-   opacity: 1;
- }
- 
- #dropdown-check:checked + .dropdown-label .dropdown-icon {
-   transform: rotate(90deg);
-   transition: transform 0.6s ease;
- }
- 
- #dropdown-check:not(:checked) + .dropdown-label .dropdown-icon {
-   transform: rotate(-90deg);
-   transition: transform 0.6s ease;
- }
- 
- #check:checked ~ .btn-one i {
-   opacity: 0;
- }
- 
- #check:checked ~ .sidebar-menu .btn-two i {
-   opacity: 1;
- }
- 
- /***************************************************************
-  * 9. Hero Section
-  ***************************************************************/
-  .hero {
-    position: relative;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: rgba(0, 0, 0, 0.3);
-    color: #EDEDED;
-    text-align: center;
-    padding: 15px 40px;
-    margin-bottom: 35px;
-    transition: left 0.4s linear, transform 0.4s linear, font-size 0.4s linear;
-  }
- 
- .hero.nav-open {
-   left: calc(50% + 220px);
-   transform: translateX(-50%);
- }
- 
- .hero h1 {
-  font-size: 2em;
-  margin-bottom: 10px;
-  transition: font-size 0.4s linear;
-  }
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+/***************************************************************
+* 2. Global Layout & Typography
+***************************************************************/
+body,
+html {
+	font-family: "Poppins", sans-serif;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	background: url("../images/background.png") right no-repeat;
+	background-size: cover;
+	justify-content: center;
+	align-items: center;
+	overflow-x: hidden;
+}
+
+.main-box {
+	height: 100vh;
+	width: 100%;
+}
+
+/***************************************************************
+* 3. Sidebar Menu Base Styles
+***************************************************************/
+.main-box .sidebar-menu {
+	position: fixed;
+	height: 100vh;
+	width: 240px;
+	left: -240px;
+	background: rgba(0, 0, 0, 0.6);
+	box-shadow: 0px 0px 6px rgba(255, 255, 255, 0.5);
+	overflow: hidden;
+	transition: all 0.4s linear;
+	z-index: 99;
+}
+
+.sidebar-menu .logo {
+	position: absolute;
+	width: 100%;
+	height: 60px;
+	box-shadow: 0px 2px 4px rgba(255, 255, 255, 0.5);
+}
+
+.sidebar-menu .logo a {
+	color: #EDEDED;
+	font-size: 22px;
+	font-weight: 500;
+	position: absolute;
+	left: 20px;
+	line-height: 60px;
+	text-decoration: none;
+}
+
+/***************************************************************
+* 4. Sidebar Menu - Main Menu Items
+***************************************************************/
+.sidebar-menu .menu {
+	position: absolute;
+	top: 80px;
+	width: 100%;
+}
+
+.sidebar-menu .menu li {
+	margin-top: 6px;
+	padding: 0;
+	position: relative;
+	list-style: none;
+}
+
+.menu-header {
+	display: block;
+	padding: 14px 20px;
+}
+
+.menu-item .dropdown-label {
+	display: block;
+	width: 100%;
+	height: 100%;
+}
+
+.dropdown-label {
+	align-items: center;
+	cursor: pointer;
+	color: #EDEDED;
+	font-size: 16px;
+	text-decoration: none;
+	transition: transform 0.4s ease;
+}
+
+.dropdown-label .dropdown-icon {
+	font-size: 24px;
+	color: #EDEDED;
+	margin-top: 4px;
+	float: right;
+	cursor: pointer;
+	transition: transform 0.4s ease;
+	flex-grow: 1;
+}
+
+.sidebar-menu .menu i {
+	color: #EDEDED;
+	font-size: 16px;
+	padding-right: 8px;
+}
+
+.sidebar-menu .menu a {
+	color: #EDEDED;
+	font-size: 16px;
+	text-decoration: none;
+}
+
+/***************************************************************
+* 5. Sidebar Menu - Sub-menu & Sub-heading
+***************************************************************/
+.sidebar-menu .sub-menu {
+	max-height: 0;
+	overflow: hidden;
+	opacity: 0;
+	transition: max-height 0.4s ease, opacity 0.3s ease;
+}
+
+#dropdown-check:checked~.sub-menu {
+	max-height: 200px;
+	transition: 0.8s ease;
+	opacity: 1;
+}
+
+.sidebar-menu .menu .sub-menu li.sub-heading {
+	margin-top: 6px;
+	padding: 0;
+	display: block;
+}
+
+.sidebar-menu .menu .sub-menu li.sub-heading a .sub-heading-text {
+	display: block;
+	padding: 14px 20px;
+}
+
+/***************************************************************
+* 6. Hover Effects for Menu Items
+***************************************************************/
+.sidebar-menu .menu li:hover {
+	border-left: 1px solid #EDEDED;
+	box-shadow: 0 0 4px rgba(255, 255, 255, 0.5);
+}
+
+.sidebar-menu .menu .sub-menu li.sub-heading:hover {
+	border-left: 1px solid #EDEDED;
+}
+
+.sidebar-menu .menu .sub-menu li.sub-heading:hover a .sub-heading-text {
+	color: #FFC107;
+	transition: color 0.4s ease;
+}
+
+.dropdown-icon:hover,
+.dropdown-label:hover {
+	color: #FFC107;
+	transition: color 0.4s ease;
+}
+
+.dropdown-label:hover .dropdown-icon {
+	color: #EDEDED;
+	transition: color 0.4s ease;
+}
+
+.sidebar-menu .menu li:hover .menu-header span,
+.sidebar-menu .menu li:hover .menu-header i {
+	color: #FFC107;
+	transition: color 0.4s ease;
+}
+
+/***************************************************************
+* 7. Sidebar Social Media Links
+***************************************************************/
+.sidebar-menu .social-media {
+	position: absolute;
+	left: 50%;
+	bottom: 20px;
+	transform: translateX(-50%);
+	list-style: none;
+	cursor: pointer;
+}
+
+.sidebar-menu .social-media ul {
+	display: flex;
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+
+.sidebar-menu .social-media i {
+	padding: 0 10px;
+	color: #EDEDED;
+	opacity: 0.6;
+	font-size: 18px;
+	text-decoration: none;
+}
+
+.sidebar-menu .social-media i:hover {
+	opacity: 1;
+	transition: all 0.3s linear;
+	transform: scale(1.01);
+}
+
+/***************************************************************
+* 8. Toggle Buttons (Hamburger & Close)
+***************************************************************/
+#check {
+	display: none;
+}
+
+.main-box .btn-one i {
+	color: #EDEDED;
+	font-size: 30px;
+	font-weight: 700;
+	position: absolute;
+	left: 16px;
+	line-height: 60px;
+	cursor: pointer;
+	opacity: 1;
+	transition: 0.3s linear;
+	z-index: 100;
+}
+
+.sidebar-menu .btn-two i {
+	font-size: 30px;
+	line-height: 60px;
+	position: absolute;
+	left: 205px;
+	cursor: pointer;
+	opacity: 0;
+	color: #EDEDED;
+	transition: 0.3s linear;
+}
+
+.btn-one i:hover {
+	font-size: 36px;
+}
+
+.btn-two i:hover {
+	font-size: 36px;
+}
+
+#check:checked~.sidebar-menu {
+	left: 0;
+}
+
+#dropdown-check:checked~.sub-menu {
+	max-height: 200px;
+	opacity: 1;
+}
+
+#dropdown-check:checked+.dropdown-label .dropdown-icon {
+	transform: rotate(90deg);
+	transition: transform 0.6s ease;
+}
+
+#dropdown-check:not(:checked)+.dropdown-label .dropdown-icon {
+	transform: rotate(-90deg);
+	transition: transform 0.6s ease;
+}
+
+#check:checked~.btn-one i {
+	opacity: 0;
+}
+
+#check:checked~.sidebar-menu .btn-two i {
+	opacity: 1;
+}
+
+/***************************************************************
+* 9. Hero Section
+***************************************************************/
+.hero {
+	position: relative;
+	left: 50%;
+	transform: translateX(-50%);
+	background-color: rgba(0, 0, 0, 0.3);
+	color: #EDEDED;
+	text-align: center;
+	padding: 15px 40px;
+	margin-bottom: 35px;
+	transition: left 0.4s linear, transform 0.4s linear, font-size 0.4s linear;
+}
+
+.hero.nav-open {
+	left: calc(50% + 220px);
+	transform: translateX(-50%);
+}
+
+.hero h1 {
+	font-size: 2em;
+	margin-bottom: 10px;
+	transition: font-size 0.4s linear;
+}
 
 .hero-content p {
+	color: #FFC107;
+	font-size: clamp(1rem, 2vw, 1.2rem);
+	transition: font-size 0.4s linear;
+}
+
+/***************************************************************
+* 10. Text Container & Editor Areas
+***************************************************************/
+.text-container {
+	position: fixed;
+	width: 90%;
+	bottom: 50px;
+	left: 50%;
+	transform: translateX(-50%);
+	transition: left 0.4s linear, transform 0.4s linear;
+	height: auto;
+	margin-top: 20px;
+	z-index: 1;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.text-container.nav-open {
+	left: calc(50% + 220px);
+	transform: translateX(-50%);
+}
+
+.input-area,
+.output-area {
+	position: relative;
+	width: 40vw;
+	margin: 0 5px;
+	transition: width 0.4s linear;
+}
+
+.input-area .editor-container,
+.output-area .editor-container {
+	font-family: 'Courier New', Courier, monospace;
+	height: calc(100vh - 250px);
+	width: 100%;
+	padding: 20px 10px 10px 10px;
+	outline: none;
+	font-size: 1em;
+	line-height: 1.8;
+	border-radius: 10px;
+	border: 1px solid #EDEDED;
+	background: rgba(0, 0, 0, 0.6);
+	color: #EDEDED;
+	transition: 0.4s ease;
+	resize: none;
+	text-align: left;
+	vertical-align: top;
+}
+
+.input-area.focused .editor-container,
+.output-area.focused .editor-container {
+	color: #EDEDED;
+	border: 2px solid #FFC107;
+	transition: color 0.4s linear;
+}
+
+/***************************************************************
+* 11. Floating Label Styling
+***************************************************************/
+.input-area .labelline,
+.output-area .labelline {
+	position: absolute;
+	top: 17px;
+	left: 10%;
+	font-size: 16px;
+	color: #EDEDED;
+	background: transparent;
+	padding: 0;
+	line-height: normal;
+	transform: translate(0, 32px) scale(1);
+	transition: transform 0.4s ease, color 0.4s ease, background 0.4s ease, padding 0.4s ease, line-height 0.4s ease;
+	pointer-events: none;
+}
+
+.output-area.focused .labelline,
+.input-area .editor-container:focus+.labelline,
+.input-area .editor-container.has-content+.labelline,
+.output-area .editor-container:focus+.labelline,
+.output-area .editor-container.has-content+.labelline {
+	color: #FFC107;
+	background: rgba(0, 0, 0, 1);
+	padding: 0 12px;
+	line-height: 30px;
+	transform: translate(-32px, -32px) scale(0.88);
+	transition: 0.4s ease;
+	z-index: 1;
+}
+
+.input-area .editor-container:not(:focus):not(.has-content)+.labelline,
+.output-area .editor-container:not(:focus):not(.has-content)+.labelline {
+	transform: none;
+	padding: 0;
+	line-height: normal;
+	background: transparent;
+	color: #EDEDED;
+}
+
+/***************************************************************
+* 12. Monaco Editor Background & Scrollbar
+***************************************************************/
+.monaco-editor .monaco-editor-background {
+	background-color: rgba(0, 0, 0, 0.6) !important;
+}
+
+.editor-container::-webkit-scrollbar {
+	width: 0.8em;
+	cursor: pointer;
+}
+
+.editor-container::-webkit-scrollbar-thumb {
+	background-color: rgba(158, 106, 0, 0.6);
+	border-radius: 10px;
+	border: 3px solid transparent;
+	cursor: grab;
+	background-clip: padding-box;
+}
+
+#custom-context-menu {
+	position: absolute;
+	background: #0c0c0c;
+	color: #EDEDED;
+	border: 1px solid rgba(255, 255, 255, 0.5);
+	border-radius: 4px;
+	box-shadow: 0px 0px 6px rgba(255, 255, 255, 0.5);
+	font-family: "Poppins", sans-serif;
+	z-index: 10000;
+  }
+  
+  #custom-context-menu .menu-item {
+	padding: 0.4rem 0.7rem;
+	cursor: pointer;
+	transition: color 0.4s ease, border-left 0.4s ease;
+	display: block;
+  }
+  
+  #custom-context-menu .menu-item:hover {
+	background: transparent;
+	color: #FFC107;
+	box-shadow: 0 0 4px rgba(255, 255, 255, 0.5);
+  }  
+  
+/***************************************************************
+* 13. Generate Button
+***************************************************************/
+.generate-btn-box {
+	text-align: center;
+	margin: 0 20px;
+}
+
+#generate-btn {
+  width: 8vw;
+  max-width: 150px;
+  min-height: 8vh;
+  padding: 5px 10px;
+  background-color: #141416;
   color: #FFC107;
-  white-space: wrap;
-  font-size: clamp(1rem, 2vw, 1.2rem);
-  transition: font-size 0.4s linear;
- }
- 
- /***************************************************************
-  * 10. Text Container & Editor Areas
-  ***************************************************************/
-  .text-container {
-    position: fixed;
-    width: 90%;
-    bottom: 50px;
-    left: 50%;
+  border: 1.5px solid #EDEDED;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.6s all ease;
+  font-size: clamp(0.2rem, 1.5vw, 1.3rem);
+  overflow: hidden;
+  text-align: center;
+  white-space: nowrap;
+}
+
+#generate-btn:hover {
+	background-color: #EDEDED;
+	color: #141416;
+	border: 2px solid #FFC107;
+	transform: scale(1.05);
+	transition: 0.6s all ease;
+}
+
+.btn-content {
+	transition: font-size 0.6s ease;
+	font-size: inherit;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+#generate-btn:hover .btn-content {
+	font-size: inherit;
+}
+
+#generate-btn::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 50%;
+	right: 50%;
+	bottom: 0;
+	background-color: #EDEDED;
+	opacity: 0;
+	z-index: -1;
+	transition: 0.6s all ease;
+}
+
+#generate-btn:hover::before {
+	left: 0;
+	right: 0;
+	opacity: 1;
+	transition: 0.6s all ease;
+}
+
+#generate-btn div {
+	width: 100%;
+}
+
+#generate-btn div::before {
+	content: attr(data-text);
+}
+
+#generate-btn:hover div::before {
+	content: attr(data-hover);
+}
+
+#check:checked ~ .hero {
+  left: calc((100% + 240px) / 2);
+  transform: translateX(-50%);
+  transition: left 0.4s linear, transform 0.4s linear;
+}
+
+#check:checked ~ .text-container {
+  left: calc((100% + 240px) / 2);
+  transform: translateX(-50%);
+  width: calc(100% - 50px);
+  transition: left 0.4s linear, transform 0.4s linear, width 0.4s linear;
+}
+
+#check:checked ~ .text-container .input-area,
+#check:checked ~ .text-container .output-area {
+  width: 35vw;
+}
+
+@media only screen and (max-width: 1440px) {
+  #check:checked ~ .hero {
+    left: calc((100% + 240px) / 2);
     transform: translateX(-50%);
     transition: left 0.4s linear, transform 0.4s linear;
-    height: auto;
-    margin-top: 20px;
-    z-index: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
   }
- 
- .text-container.nav-open {
-   left: calc(50% + 220px);
-   transform: translateX(-50%);
- }
- 
- .input-area, 
- .output-area {
-   position: relative;
-   width: 40vw;
-   /* max-width: 650px; */
-   line-height: 88px;
-   margin: 0 5px;
-   transition: width 0.4s linear;
- }
- 
- .input-area .editor-container, 
- .output-area .editor-container {
-   font-family: 'Courier New', Courier, monospace;
-   height: calc(100vh - 250px);
-   width: 100%;
-   /* max-width: 650px; */
-   padding: 20px 10px 10px 10px;
-   outline: none;
-   font-size: 1em;
-   line-height: 1.8;
-   border-radius: 10px;
-   border: 1px solid #EDEDED;
-   background: rgba(0, 0, 0, 0.6);
-   color: #EDEDED;
-   transition: 0.4s ease;
-   resize: none;
-   text-align: left;
-   vertical-align: top;
- }
- 
- .input-area.focused .editor-container,
- .output-area.focused .editor-container {
-   color: #EDEDED;
-   border: 2px solid #FFC107;
-   transition: color 0.4s linear;
- }
- 
- /***************************************************************
-  * 11. Floating Label Styling
-  ***************************************************************/
- .input-area .labelline,
- .output-area .labelline {
-   position: absolute;
-   top: 17px;
-   left: 10%;
-   font-size: 16px;
-   color: #EDEDED;
-   background: transparent;
-   padding: 0;
-   line-height: normal;
-   transform: translate(0, 32px) scale(1);
-   transition: transform 0.4s ease, color 0.4s ease, background 0.4s ease, padding 0.4s ease, line-height 0.4s ease;
-   pointer-events: none;
- }
- 
- .output-area.focused .labelline,
- .input-area .editor-container:focus + .labelline,
- .input-area .editor-container.has-content + .labelline,
- .output-area .editor-container:focus + .labelline,
- .output-area .editor-container.has-content + .labelline {
-   color: #FFC107;
-   background: rgba(0, 0, 0, 1);
-   padding: 0 12px;
-   line-height: 30px;
-   transform: translate(-32px, -32px) scale(0.88);
-   transition: 0.4s ease;
-   z-index: 1;
- }
- 
- .input-area .editor-container:not(:focus):not(.has-content) + .labelline,
- .output-area .editor-container:not(:focus):not(.has-content) + .labelline {
-   transform: none;
-   padding: 0;
-   line-height: normal;
-   background: transparent;
-   color: #EDEDED;
- }
- 
- /***************************************************************
-  * 12. Monaco Editor Background & Scrollbar
-  ***************************************************************/
- .monaco-editor .monaco-editor-background {
-   background-color: rgba(0, 0, 0, 0.6) !important;
- }
- 
- .editor-container::-webkit-scrollbar {
-   width: 0.8em;
-   cursor: pointer;
- }
- 
- .editor-container::-webkit-scrollbar-thumb {
-   background-color: rgba(158, 106, 0, 0.6);
-   border-radius: 10px;
-   border: 3px solid transparent;
-   cursor: grab;
-   background-clip: padding-box;
- }
- 
- /***************************************************************
-  * 13. Generate Button
-  ***************************************************************/
- .generate-btn-box {
-   text-align: center;
-   margin: 0 20px;
- }
- 
- #generate-btn {
-   width: 8vw; 
-   max-width: 150px;
-   min-height: 8vh;
-   padding: 5px; 
-   background-color: #141416;
-   color: #FFC107;
-   border: 1.5px solid #EDEDED;
-   border-radius: 10px;
-   cursor: pointer;
-   transition: 0.6s all ease;
-   font-size: clamp(1rem, 2vw, 1.2rem);
-   overflow: hidden;
-   text-align: center;
- }
- 
- #generate-btn:hover {
-   background-color: #EDEDED;
-   font-size: clamp(1rem, 2vw, 1.2rem);
-   color: #141416;
-   border: 2px solid #FFC107;
-   transform: scale(1.05);
-   transition: 0.6s all ease;
- }
- 
- .btn-content {
-   transition: font-size 0.6s ease;
-   font-size: 1.3rem;
-   display: flex;
-   align-items: center;
-   justify-content: center;
- }
- 
- #generate-btn:hover .btn-content {
-   font-size: 1.5rem;
- }
- 
- #generate-btn::before {
-   content: "";
-   position: absolute;
-   top: 0;
-   left: 50%;
-   right: 50%;
-   bottom: 0;
-   background-color: #EDEDED;
-   opacity: 0;
-   z-index: -1;
-   transition: 0.6s all ease;
- }
- 
- #generate-btn:hover::before {
-   left: 0;
-   right: 0;
-   opacity: 1;
-   transition: 0.6s all ease;
- }
- 
- #generate-btn div {
-   width: 100%;
-   word-break: break-word;
- }
- 
- #generate-btn div::before {
-   content: attr(data-text);
- }
- 
- #generate-btn:hover div::before {
-   content: attr(data-hover);
- }
 
- @media only screen and (min-width: 1024px) and (max-width: 1440px) {
-  
-
-  .hero.nav-open {
-    left: calc(50% + 120px);
+  #check:checked ~ .text-container {
+    left: calc((100% + 240px) / 2);
     transform: translateX(-50%);
+    width: calc(100% - 120px);
+    transition: left 0.4s linear, transform 0.4s linear, width 0.4s linear;
   }
 
-  .hero.nav-open h1 {
-    font-size: 2em;
-  }
-  .hero.nav-open .hero-content p {
-    font-size: clamp(1rem, 1vw, 2rem);
-  }
-  
-  .text-container.nav-open {
-    left: calc(50% + 120px);
-    transform: translateX(-50%);
-  }
-
-  .text-container.nav-open .input-area,
-  .text-container.nav-open .output-area {
+  #check:checked ~ .text-container .input-area,
+  #check:checked ~ .text-container .output-area {
     width: 30vw;
   }
 
-  .text-container.nav-open .input-area .editor-container,
-  .text-container.nav-open .output-area .editor-container {
-    transition: width 0.4s linear;
+  #check:checked ~ .hero .hero-content h1 {
+    font-size: 1.8em;
+    transition: font-size 0.4s linear;
   }
+
+  #check:checked ~ .hero .hero-content p {
+    font-size: clamp(0.9rem, 1.8vw, 1rem);
+    transition: font-size 0.4s linear;
+  }
+
+  #custom-context-menu {
+	position: absolute;
+	background: #0c0c0c;
+	color: #EDEDED;
+	border: 1px solid rgba(255, 255, 255, 0.5);
+	border-radius: 4px;
+	box-shadow: 0px 0px 4px rgba(255, 255, 255, 0.5);
+	font-family: "Poppins", sans-serif;
+	z-index: 10000;
+  }
+  
+  #custom-context-menu .menu-item {
+	padding: 0.2rem 0.4rem;
+	cursor: pointer;
+	transition: color 0.4s ease, border-left 0.4s ease;
+	display: block;
+  }
+  
+  #custom-context-menu .menu-item:hover {
+	background: transparent;
+	color: #FFC107;
+	box-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+  }   
 }

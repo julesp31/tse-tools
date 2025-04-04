@@ -1,17 +1,16 @@
-// script.js
+// main.js
 
-window.addEventListener("load", function () {
+window.addEventListener("load", () => {
   require.config({
-    paths: { vs: "https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.39.0/min/vs" }
+    paths: {
+      vs: "https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.39.0/min/vs"
+    }
   });
 
-  require(["vs/editor/editor.main"], function () {
-    // Disable JSON validation in Monaco
+  require(["vs/editor/editor.main"], () => {
     monaco.languages.json.jsonDefaults.setDiagnosticsOptions({ validate: false });
 
-    // Initialize Monaco Editor for Input
-    var inputEditor = monaco.editor.create(document.getElementById("input-text"), {
-      value: "",
+    const commonOpts = {
       language: "json",
       theme: "vs-dark",
       automaticLayout: true,
@@ -20,29 +19,71 @@ window.addEventListener("load", function () {
       scrollbar: { vertical: "auto", horizontal: "auto" },
       lineNumbers: "on",
       lineNumbersMinChars: 1,
-      wordWrap: "on"
+      wordWrap: "on",
+      glyphMargin: false,
+      folding: false,
+      contextmenu: false
+    };
+
+    const inputEditor = monaco.editor.create(
+      document.getElementById("input-text"),
+      { value: "", ...commonOpts }
+    );
+
+    const outputEditor = monaco.editor.create(
+      document.getElementById("output-text"),
+      { value: "", readOnly: true, ...commonOpts }
+    );
+
+    // Context menu
+    const createMenu = (editor, items, x, y) => {
+      const prev = document.getElementById("custom-context-menu");
+      if (prev) prev.remove();
+      const menu = document.createElement("div");
+      menu.id = "custom-context-menu";
+      // Set dynamic menu position
+      menu.style.top = y + "px";
+      menu.style.left = x + "px";
+      // Add each menu item
+      items.forEach(({ label, command }) => {
+        const item = document.createElement("div");
+        item.className = "menu-item";
+        item.textContent = label;
+        item.addEventListener("click", () => {
+          editor.focus();
+          editor.trigger("custom", command, null);
+          menu.remove();
+        });
+        menu.appendChild(item);
+      });
+      document.body.appendChild(menu);
+    };
+
+    // Attach custom context menus to the editor containers
+    document.getElementById("input-text").addEventListener("contextmenu", e => {
+      e.preventDefault();
+      createMenu(inputEditor, [
+        { label: "Copy", command: "editor.action.clipboardCopyAction" },
+        { label: "Paste", command: "editor.action.clipboardPasteAction" },
+        { label: "Format", command: "editor.action.formatDocument" }
+      ], e.pageX, e.pageY);
+    });
+    document.getElementById("output-text").addEventListener("contextmenu", e => {
+      e.preventDefault();
+      createMenu(outputEditor, [
+        { label: "Copy", command: "editor.action.clipboardCopyAction" }
+      ], e.pageX, e.pageY);
+    });
+    document.addEventListener("click", () => {
+      const menu = document.getElementById("custom-context-menu");
+      if (menu) menu.remove();
     });
 
-    // Initialize Monaco Editor for Output
-    var outputEditor = monaco.editor.create(document.getElementById("output-text"), {
-      value: "",
-      language: "json",
-      theme: "vs-dark",
-      readOnly: true,
-      automaticLayout: true,
-      minimap: { enabled: false },
-      scrollBeyondLastLine: false,
-      scrollbar: { vertical: "auto", horizontal: "auto" },
-      lineNumbers: "on",
-      lineNumbersMinChars: 1,
-      wordWrap: "on"
-    });
-
-    // Format on paste in the input editor
+    // Input editor paste and focus/blur events
     inputEditor.onDidPaste(() => {
       try {
-        let raw = inputEditor.getValue();
-        let formatted = JSON.stringify(JSON.parse(raw), null, 2);
+        const raw = inputEditor.getValue();
+        const formatted = JSON.stringify(JSON.parse(raw), null, 2);
         inputEditor.setValue(formatted);
         if (formatted.trim() !== "") {
           document.querySelector(".input-area").classList.add("focused");
@@ -52,8 +93,6 @@ window.addEventListener("load", function () {
         console.error("Invalid JSON", e);
       }
     });
-
-    // Focus/blur events
     inputEditor.onDidFocusEditorText(() => {
       document.querySelector(".input-area").classList.add("focused");
       document.querySelector(".input-area .editor-container").classList.add("has-content");
@@ -65,41 +104,27 @@ window.addEventListener("load", function () {
       }
     });
 
-    // Grab references for sidebar toggle
-    const mainBox = document.querySelector('.main-box');
-    const btnOne = document.querySelector('.btn-one');
-    const btnTwo = document.querySelector('.btn-two');
-
-    // Toggle .nav-open on the .main-box instead of .text-container/.hero
-    btnOne.addEventListener('click', () => {
-      mainBox.classList.add('nav-open');
-    });
-    btnTwo.addEventListener('click', () => {
-      mainBox.classList.remove('nav-open');
-    });
-
-    // "Generate" button logic
-    document.getElementById("generate-btn").addEventListener("click", function () {
-      const inputVal = inputEditor.getValue();
+    // Generate button logic
+    document.getElementById("generate-btn").addEventListener("click", () => {
       fetch("/process", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ text: inputVal })
+        body: JSON.stringify({ text: inputEditor.getValue() })
       })
-      .then(response => response.json())
+      .then(res => res.json())
       .then(data => {
         outputEditor.setValue(data.printing_times);
+        const outArea = document.querySelector(".output-area"),
+              outCont = document.querySelector(".output-area .editor-container");
         if (data.printing_times.trim() !== "") {
-          document.querySelector(".output-area").classList.add("focused");
-          document.querySelector(".output-area .editor-container").classList.add("has-content");
+          outArea.classList.add("focused");
+          outCont.classList.add("has-content");
         } else {
-          document.querySelector(".output-area").classList.remove("focused");
-          document.querySelector(".output-area .editor-container").classList.remove("has-content");
+          outArea.classList.remove("focused");
+          outCont.classList.remove("has-content");
         }
       })
-      .catch(error => {
-        console.error("Error:", error);
-      });
+      .catch(err => console.error("Error:", err));
     });
   });
 });

@@ -17,22 +17,27 @@
 /***************************************************************
 * 2. Global Layout & Typography
 ***************************************************************/
-body,
-html {
+html, body {
   font-family: "Poppins", sans-serif;
   width: 100%;
   height: 100%;
+  margin: 0;
+  padding: 0;
   display: flex;
-  background: url("../images/background.png") right no-repeat;
-  background-size: cover;
   justify-content: center;
   align-items: center;
   overflow-x: hidden;
+  background-color: #141416; /* Fallback background color */
+  background: url("../images/background.png") right no-repeat;
+  background-size: cover;
+  transition: background 0.3s ease; /* Smooth background transition */
 }
 
+/* Ensures that content fits properly and maintains flexbox layout */
 .main-box {
   height: 100vh;
   width: 100%;
+  position: relative;
 }
 
 /***************************************************************

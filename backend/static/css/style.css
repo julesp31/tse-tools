@@ -27,11 +27,11 @@ html, body {
   justify-content: center;
   align-items: center;
   overflow-x: hidden;
-  background-color: #141416; /* Fallback color before image loads */
+  background-color: #141416;
   background-image: url("../images/background.png");
   background-position: center right;
   background-size: cover;
-  visibility: hidden; /* Initially hidden to prevent flickering */
+  visibility: hidden;
   transition: visibility 0.3s ease, background-color 0.3s ease;
 }
 

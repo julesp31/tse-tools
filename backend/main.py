@@ -1,3 +1,7 @@
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
 from flask import Flask, request, render_template, jsonify
 from backend.free_busy_times import get_busy_list
 from backend.oit_slots import get_oit_list

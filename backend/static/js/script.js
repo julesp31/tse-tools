@@ -1,5 +1,3 @@
-// main.js
-
 window.addEventListener("load", () => {
   require.config({
     paths: {
@@ -10,7 +8,15 @@ window.addEventListener("load", () => {
   require(["vs/editor/editor.main"], () => {
     monaco.languages.json.jsonDefaults.setDiagnosticsOptions({ validate: false });
 
+    // Change font size based on screen width
+    function adjustFontSize() {
+      const screenWidth = window.innerWidth;
+      return screenWidth <= 1440 ? 13 : 14;
+    }
+
+    // Monaco Editor configuration
     const commonOpts = {
+      fontFamily: 'JetBrains Mono, monospace',
       language: "json",
       theme: "vs-dark",
       automaticLayout: true,
@@ -22,7 +28,9 @@ window.addEventListener("load", () => {
       wordWrap: "on",
       glyphMargin: false,
       folding: false,
-      contextmenu: false
+      contextmenu: false,
+      occurrencesHighlight: false,
+      fontSize: adjustFontSize()
     };
 
     const inputEditor = monaco.editor.create(
@@ -111,20 +119,27 @@ window.addEventListener("load", () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ text: inputEditor.getValue() })
       })
-      .then(res => res.json())
-      .then(data => {
-        outputEditor.setValue(data.printing_times);
-        const outArea = document.querySelector(".output-area"),
-              outCont = document.querySelector(".output-area .editor-container");
-        if (data.printing_times.trim() !== "") {
-          outArea.classList.add("focused");
-          outCont.classList.add("has-content");
-        } else {
-          outArea.classList.remove("focused");
-          outCont.classList.remove("has-content");
-        }
-      })
-      .catch(err => console.error("Error:", err));
+        .then(res => res.json())
+        .then(data => {
+          outputEditor.setValue(data.printing_times);
+          const outArea = document.querySelector(".output-area"),
+            outCont = document.querySelector(".output-area .editor-container");
+          if (data.printing_times.trim() !== "") {
+            outArea.classList.add("focused");
+            outCont.classList.add("has-content");
+          } else {
+            outArea.classList.remove("focused");
+            outCont.classList.remove("has-content");
+          }
+        })
+        .catch(err => console.error("Error:", err));
+    });
+
+    // Update font size dynamically on window resize
+    window.addEventListener("resize", () => {
+      const fontSize = adjustFontSize(); // Recalculate font size based on screen size
+      inputEditor.updateOptions({ fontSize });
+      outputEditor.updateOptions({ fontSize });
     });
   });
 });

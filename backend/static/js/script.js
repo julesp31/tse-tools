@@ -1,4 +1,7 @@
 window.addEventListener("load", () => {
+  // Ensure CSS body becomes visible after everything is loaded
+  document.body.classList.add("loaded");
+
   require.config({
     paths: {
       vs: "https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.39.0/min/vs"

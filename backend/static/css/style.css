@@ -27,17 +27,21 @@ html, body {
   justify-content: center;
   align-items: center;
   overflow-x: hidden;
-  background-color: #141416; /* Fallback background color */
-  background: url("../images/background.png") right no-repeat;
+  background-color: #141416; /* Fallback color before image loads */
+  background-image: url("../images/background.png");
+  background-position: center right;
   background-size: cover;
-  transition: background 0.3s ease; /* Smooth background transition */
+  visibility: hidden; /* Initially hidden to prevent flickering */
+  transition: visibility 0.3s ease, background-color 0.3s ease;
 }
 
-/* Ensures that content fits properly and maintains flexbox layout */
+body.loaded {
+  visibility: visible;
+}
+
 .main-box {
   height: 100vh;
   width: 100%;
-  position: relative;
 }
 
 /***************************************************************

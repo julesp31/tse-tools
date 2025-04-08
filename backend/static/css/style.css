@@ -326,6 +326,12 @@ body.loaded {
   transition: font-size 0.4s linear;
 }
 
+#check:checked ~ .hero {
+	left: calc((100% + 240px) / 2);
+	transform: translateX(-50%);
+	transition: left 0.4s linear, transform 0.4s linear;
+}
+
 /***************************************************************
 * 10. Text Container & Editor Areas
 ***************************************************************/
@@ -381,6 +387,18 @@ body.loaded {
   border: 2px solid #FFC107;
   transition: color 0.4s linear;
 }
+
+#check:checked ~ .text-container {
+	left: calc((100% + 240px) / 2);
+	transform: translateX(-50%);
+	width: calc(100% - 50px);
+	transition: left 0.4s linear, transform 0.4s linear, width 0.4s linear;
+  }
+  
+  #check:checked ~ .text-container .input-area,
+  #check:checked ~ .text-container .output-area {
+	width: 35vw;
+  }
 
 /***************************************************************
 * 11. Floating Label Styling
@@ -551,57 +569,39 @@ body.loaded {
 * 15. Responsive Adjustments
 ***************************************************************/
 @media only screen and (max-width: 1440px) {
-  #check:checked ~ .hero {
-    left: calc((100% + 240px) / 2);
-    transform: translateX(-50%);
-    transition: left 0.4s linear, transform 0.4s linear;
-  }
 
-  #check:checked ~ .text-container {
-    left: calc((100% + 240px) / 2);
-    transform: translateX(-50%);
-    width: calc(100% - 120px);
-    transition: left 0.4s linear, transform 0.4s linear, width 0.4s linear;
+	#check:checked ~ .hero {
+	  left: calc((100% + 240px) / 2);
+	  transform: translateX(-50%);
+	  transition: left 0.4s linear, transform 0.4s linear;
+	}
+  
+	#check:checked ~ .text-container {
+	  left: calc((100% + 240px) / 2);
+	  width: calc(100% - 120px);
+	  transition: left 0.4s linear, transform 0.4s linear, width 0.4s linear;
+	}
+  
+	#check:checked ~ .text-container .input-area,
+	#check:checked ~ .text-container .output-area {
+	  width: 32vw;
+	}
+  
+	#check:checked ~ .hero .hero-content h1 {
+	  font-size: 1.8em;
+	  transition: font-size 0.4s linear;
+	}
+  
+	#check:checked ~ .hero .hero-content p {
+	  font-size: clamp(0.9rem, 1.8vw, 1rem);
+	  transition: font-size 0.4s linear;
+	}
+  
+	#custom-context-menu {
+	  font-size: 0.9rem;
+	}
+  
+	#custom-context-menu .menu-item {
+	  font-size: 0.9rem;
+	}
   }
-
-  #check:checked ~ .text-container .input-area,
-  #check:checked ~ .text-container .output-area {
-    width: 32vw;
-  }
-
-  #check:checked ~ .hero .hero-content h1 {
-    font-size: 1.8em;
-    transition: font-size 0.4s linear;
-  }
-
-  #check:checked ~ .hero .hero-content p {
-    font-size: clamp(0.9rem, 1.8vw, 1rem);
-    transition: font-size 0.4s linear;
-  }
-
-  #custom-context-menu {
-    font-size: 0.9rem;
-    position: absolute;
-    background: #0c0c0c;
-    color: #EDEDED;
-    border: 1px solid rgba(255, 255, 255, 0.5);
-    border-radius: 4px;
-    box-shadow: 0px 0px 4px rgba(255, 255, 255, 0.5);
-    font-family: "Poppins", sans-serif;
-    z-index: 10000;
-  }
-
-  #custom-context-menu .menu-item {
-    font-size: 0.9rem;
-    padding: 0.2rem 0.4rem;
-    cursor: pointer;
-    transition: color 0.4s ease, border-left 0.4s ease;
-    display: block;
-  }
-
-  #custom-context-menu .menu-item:hover {
-    background: transparent;
-    color: #FFC107;
-    box-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
-  }
-}

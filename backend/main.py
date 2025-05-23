@@ -1,15 +1,23 @@
 import sys
 import os
+
+# Add backend folder to sys path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from flask import Flask, request, render_template, jsonify
+# Import backend functions
 from backend.free_busy_times import get_busy_list
 from backend.oit_slots import get_oit_list
 from backend.times_comparer import split_days
 from backend.scheduled_times import get_scheduled_list
 from backend.printing_oits import merge_excess_times
 
+# Initialize Flask app
 app = Flask(__name__, static_folder='static', template_folder='templates')
+
+# ------------------------------------
+# Open Interview Times (OIT) Formatter
+# ------------------------------------
 
 def main(athena_query):
     # Get busy, OIT, and scheduled times from the query
@@ -27,9 +35,10 @@ def main(athena_query):
     
     return printing_times
 
-@app.route("/", methods=["GET", "POST"])
-def index():
-    return render_template("index.html")
+@app.route("/", methods=["GET"])
+@app.route("/oit", methods=["GET"])
+def oit_page():
+    return render_template("oit/index.html")
 
 @app.route("/process", methods=["POST"])
 def process():
@@ -55,6 +64,37 @@ def process():
     
     return jsonify(output)
 
+@app.route("/admin-oit", methods=["GET"])
+def admin_oit_page():
+    return render_template("admin_oit/index.html")
+
+
+# -------------------------
+# Comma-Separated Formatter
+# -------------------------
+
+# @app.route("/comma-formatter", methods=["GET", "POST"])
+# def comma_formatter():
+#     if request.method == "POST":
+#         input_text = request.form.get("input_text", "")
+#         formatted = ", ".join(
+#             item.strip() for item in input_text.splitlines() if item.strip()
+#         )
+#         return render_template(
+#             "comma_formatter.html",
+#             input_text=input_text,
+#             formatted_text=formatted
+#         )
+
+#     return render_template(
+#         "comma_formatter.html",
+#         input_text="",
+#         formatted_text=""
+#     )
+
+# ---------------------
+# Run the TSE Tools app
+# ---------------------
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host="127.0.0.1", port=5000, debug=True)

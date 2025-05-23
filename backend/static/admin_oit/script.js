@@ -2,26 +2,16 @@ window.addEventListener("load", () => {
   // Ensure CSS body becomes visible after everything is loaded
   document.body.classList.add("loaded");
 
-  require.config({
-    paths: {
-      vs: "https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.39.0/min/vs"
-    }
-  });
-
-  require(["vs/editor/editor.main"], () => {
-    monaco.languages.json.jsonDefaults.setDiagnosticsOptions({ validate: false });
-
+  // Load Monaco first
+  loadMonacoEditor(() => {
     // Change font size based on screen width
-    function adjustFontSize() {
-      const screenWidth = window.innerWidth;
-      return screenWidth <= 1440 ? 13 : 14;
-    }
+    const adjustFontSize = () => window.innerWidth <= 1440 ? 13 : 14;
 
     // Monaco Editor configuration
     const commonOpts = {
       fontFamily: 'JetBrains Mono, monospace',
       language: "json",
-      theme: "vs-dark",
+      theme: "vs",
       automaticLayout: true,
       minimap: { enabled: false },
       scrollBeyondLastLine: false,
@@ -52,10 +42,8 @@ window.addEventListener("load", () => {
       if (prev) prev.remove();
       const menu = document.createElement("div");
       menu.id = "custom-context-menu";
-      // Set dynamic menu position
       menu.style.top = y + "px";
       menu.style.left = x + "px";
-      // Add each menu item
       items.forEach(({ label, command }) => {
         const item = document.createElement("div");
         item.className = "menu-item";
@@ -70,7 +58,7 @@ window.addEventListener("load", () => {
       document.body.appendChild(menu);
     };
 
-    // Attach custom context menus to the editor containers
+    // Context menu handlers
     document.getElementById("input-text").addEventListener("contextmenu", e => {
       e.preventDefault();
       createMenu(inputEditor, [
@@ -79,12 +67,14 @@ window.addEventListener("load", () => {
         { label: "Format", command: "editor.action.formatDocument" }
       ], e.pageX, e.pageY);
     });
+
     document.getElementById("output-text").addEventListener("contextmenu", e => {
       e.preventDefault();
       createMenu(outputEditor, [
         { label: "Copy", command: "editor.action.clipboardCopyAction" }
       ], e.pageX, e.pageY);
     });
+
     document.addEventListener("click", () => {
       const menu = document.getElementById("custom-context-menu");
       if (menu) menu.remove();
@@ -104,10 +94,12 @@ window.addEventListener("load", () => {
         console.error("Invalid JSON", e);
       }
     });
+
     inputEditor.onDidFocusEditorText(() => {
       document.querySelector(".input-area").classList.add("focused");
       document.querySelector(".input-area .editor-container").classList.add("has-content");
     });
+
     inputEditor.onDidBlurEditorText(() => {
       if (inputEditor.getValue().trim() === "") {
         document.querySelector(".input-area").classList.remove("focused");
@@ -140,7 +132,7 @@ window.addEventListener("load", () => {
 
     // Update font size dynamically on window resize
     window.addEventListener("resize", () => {
-      const fontSize = adjustFontSize(); // Recalculate font size based on screen size
+      const fontSize = adjustFontSize();
       inputEditor.updateOptions({ fontSize });
       outputEditor.updateOptions({ fontSize });
     });

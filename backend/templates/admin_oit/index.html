@@ -1,43 +1,97 @@
 {% extends "base.html" %}
 
 {% block styles %}
-<link rel="stylesheet" href="{{ url_for('static', filename='admin_oit/style.css') }}">
+  <!-- Custom styles -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='admin_oit/style.css') }}">
+  
+  <!-- Air Datepicker styles -->
+  <link href="https://cdn.jsdelivr.net/npm/air-datepicker@3.3.5/air-datepicker.min.css" rel="stylesheet">
 {% endblock %}
 
 {% block title %}Athena Open Interview Times Formatter | TSE Tools{% endblock %}
+
 {% block heading %}Athena Interview Times Formatter{% endblock %}
+
 {% block description %}
-Fetches a User's Open Interview Times (OITs) at the time the candidate's interview is requested.<br/>
-This considers the free/busy times we gather from a User's integrated external calendar and their Paradox availability.
+  Fetches a User's Open Interview Times (OITs) at the time the candidate's interview is requested.<br/>
+  This considers the free/busy times we gather from a User's integrated external calendar and their Paradox availability.
 {% endblock %}
 
 {% block content %}
 <div class="text-container">
-	<!-- Input -->
-	<div class="input-area">
-		<div id="input-text" class="editor-container"></div>
-		<div class="labelline">Copy-paste your text here</div>
-	</div>
+  <div class="form-area">
+    <form id="athenaquery-form" class="form-area">
+      <div class="form-field">
+        <label for="instance_name">Instance</label>
+        <select id="instance_name" name="instance_name">
+          <option value="" disabled selected>Select instance</option>
+          <option value="https://api.paradox.ai">PROD</option>
+          <option value="https://stgapi.paradox.ai">STG</option>
+          <option value="https://api.eu1.paradox.ai">EU PROD</option>
+          <option value="https://api.stg.eu1.paradox.ai">EU STG</option>
+          <option value="https://api.mchire.com">MCHIRE PROD</option>
+          <option value="https://stgapi.mchire.com">MCHIRE STG</option>
+          <option value="https://fedexapi.paradox.ai">FEDEX PROD</option>
+          <option value="https://fedexstgapi.paradox.ai/">FEDEX STG</option>
+          <option value="https://lowesapi.paradox.ai">LOWES PROD</option>
+          <option value="https://lowesstgapi.paradox.ai">LOWES STG</option>
+          <option value="https://api.sodexo.paradox.ai">SODEXO PROD</option>
+          <option value="https://dardenapi.paradox.ai">DARDEN PROD</option>
+          <option value="https://unileverapi.paradox.ai">UNILEVER</option>
+          <option value="https://lockheedapi.paradox.ai">LOCKHEED PROD</option>
+          <option value="https://aramarkapi.paradox.ai">ARAMARK PROD</option>
+          <option value="https://pepsiapi.paradox.ai">PEPSI PROD</option>
+          <option value="https://advantageapi.paradox.ai">ADVANTAGE PROD</option>
+          <option value="https://regisapi.paradox.ai">REGIS PROD</option>
+          <option value="https://api.delta.paradox.ai">DELTA PROD</option>
+          <option value="https://stgapi.smashfly.ai">SMASHFLY PROD</option>
+          <option value="https://api.smashfly.ai">SMASHFLY STG</option>
+          <option value="https://birddoghrapi.paradox.ai">BIRDDOGHR PROD</option>
+        </select>
+      </div>
 
-	<div class="generate-btn-box">
-		<button id="generate-btn">
-			<div class="btn-content" data-text="Generate" data-hover="Punch it!"></div>
-		</button>
-	</div>
+      <div class="form-field">
+        <label for="account_name">Account Name</label>
+        <input type="text" id="account_name" name="account_name" placeholder="Enter account name">
+      </div>
 
-	<!-- Output -->
-	<div class="output-area">
-		<div id="output-text" class="editor-container"></div>
-		<div class="labelline">Open Interview Times (OITs) in UTC</div>
-	</div>
+      <div class="form-field">
+        <label for="candidate_id">Candidate ID</label>
+        <input type="text" id="candidate_id" name="candidate_id" placeholder="Enter candidate ID">
+      </div>
+
+      <div class="form-field">
+        <label for="created_from">Created From</label>
+        <input type="text" id="created_from" name="created_from" placeholder="Select date and hour">
+      </div>
+
+      <div class="form-field">
+        <label for="created_to">Created To</label>
+        <input type="text" id="created_to" name="created_to" placeholder="Select date and hour">
+      </div>
+    </form>
+  </div>
+
+  <div class="generate-btn-box">
+    <button id="generate-btn" type="submit" form="athenaquery-form">
+      <div class="btn-content" data-text="Generate" data-hover="Punch it!"></div>
+    </button>
+  </div>
+
+  <div class="output-area">
+    <div id="output-text" class="editor-container" readonly></div>
+    <div class="labelline">Open Interview Times (OITs) in UTC</div>
+  </div>
 </div>
 {% endblock %}
 
 {% block scripts %}
-<!-- Monaco Loader -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.39.0/min/vs/loader.min.js"></script>
-<!-- Shared Monaco Setup -->
-<script src="{{ url_for('static', filename='common/monaco-setup.js') }}"></script>
-<!-- Admin OIT specific logic -->
-<script src="{{ url_for('static', filename='admin_oit/script.js') }}"></script>
+  <!-- Air Datepicker JS-->
+  <script src="https://cdn.jsdelivr.net/npm/air-datepicker@3.3.5/air-datepicker.min.js"></script>
+  <!-- Monaco Editor Loader -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.39.0/min/vs/loader.min.js"></script>
+  <!-- Monaco Editor base setup -->
+  <script src="{{ url_for('static', filename='common/monaco-setup.js') }}"></script>
+  <!-- Admin OIT Page-specific logic -->
+  <script src="{{ url_for('static', filename='admin_oit/script.js') }}"></script>
 {% endblock %}

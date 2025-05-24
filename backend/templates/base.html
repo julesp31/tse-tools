@@ -4,7 +4,7 @@
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width,initial-scale=1.0" />
 	<title>{% block title %}TSE Tools | Paradox{% endblock %}</title>
-    
+
 	<!-- FontAwesome -->
 	<script src="https://kit.fontawesome.com/f89168b549.js"></script>    
 	<!-- JSON5 -->
@@ -13,11 +13,9 @@
     <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
 
 	<!-- Styles -->
-	<!-- Styles -->
     {% block styles %}
     <link rel="stylesheet" href="{{ url_for('static', filename='oit/style.css') }}">
     {% endblock %}
-
 </head>
 
 <body>

@@ -1,23 +1,26 @@
+// Wait until the entire page and resources are fully loaded
 window.addEventListener("load", () => {
-  // Ensure CSS body becomes visible after everything is loaded
+  // Make the body visible after load (used to prevent flash of unstyled content)
   document.body.classList.add("loaded");
 
+  // Configure Monaco to load from CDN
   require.config({
     paths: {
       vs: "https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.39.0/min/vs"
     }
   });
 
+  // Load the Monaco Editor and set up editors, context menus, and button logic
   require(["vs/editor/editor.main"], () => {
+    // Disable built-in JSON validation errors
     monaco.languages.json.jsonDefaults.setDiagnosticsOptions({ validate: false });
 
-    // Change font size based on screen width
+    // Adjust editor font size depending on screen width
     function adjustFontSize() {
-      const screenWidth = window.innerWidth;
-      return screenWidth <= 1440 ? 13 : 14;
+      return window.innerWidth <= 1440 ? 13 : 14;
     }
 
-    // Monaco Editor configuration
+    // Shared Monaco editor settings for both input and output editors
     const commonOpts = {
       fontFamily: 'JetBrains Mono, monospace',
       language: "json",
@@ -36,26 +39,28 @@ window.addEventListener("load", () => {
       fontSize: adjustFontSize()
     };
 
-    const inputEditor = monaco.editor.create(
-      document.getElementById("input-text"),
-      { value: "", ...commonOpts }
-    );
+    // Create the main editors
+    const inputEditor = monaco.editor.create(document.getElementById("input-text"), {
+      value: "",
+      ...commonOpts
+    });
 
-    const outputEditor = monaco.editor.create(
-      document.getElementById("output-text"),
-      { value: "", readOnly: true, ...commonOpts }
-    );
+    const outputEditor = monaco.editor.create(document.getElementById("output-text"), {
+      value: "",
+      readOnly: true,
+      ...commonOpts
+    });
 
-    // Context menu
+    // Custom right-click menu handler (copy, paste, format, etc.)
     const createMenu = (editor, items, x, y) => {
       const prev = document.getElementById("custom-context-menu");
       if (prev) prev.remove();
+
       const menu = document.createElement("div");
       menu.id = "custom-context-menu";
-      // Set dynamic menu position
       menu.style.top = y + "px";
       menu.style.left = x + "px";
-      // Add each menu item
+
       items.forEach(({ label, command }) => {
         const item = document.createElement("div");
         item.className = "menu-item";
@@ -67,10 +72,11 @@ window.addEventListener("load", () => {
         });
         menu.appendChild(item);
       });
+
       document.body.appendChild(menu);
     };
 
-    // Attach custom context menus to the editor containers
+    // Attach context menu to input and output editors
     document.getElementById("input-text").addEventListener("contextmenu", e => {
       e.preventDefault();
       createMenu(inputEditor, [
@@ -79,43 +85,47 @@ window.addEventListener("load", () => {
         { label: "Format", command: "editor.action.formatDocument" }
       ], e.pageX, e.pageY);
     });
+
     document.getElementById("output-text").addEventListener("contextmenu", e => {
       e.preventDefault();
       createMenu(outputEditor, [
         { label: "Copy", command: "editor.action.clipboardCopyAction" }
       ], e.pageX, e.pageY);
     });
+
+    // Hide context menu when clicking anywhere else
     document.addEventListener("click", () => {
       const menu = document.getElementById("custom-context-menu");
       if (menu) menu.remove();
     });
 
-    // Input editor paste and focus/blur events
+    // Helper to toggle styling classes based on input editor content
+    function updateInputStyling() {
+      const hasContent = inputEditor.getValue().trim() !== "";
+      const inputArea = document.querySelector(".input-area");
+      const inputCont = document.querySelector(".input-area .editor-container");
+
+      inputArea.classList.toggle("focused", hasContent);
+      inputCont.classList.toggle("has-content", hasContent);
+    }
+
+    // Auto-format input JSON after pasting, and style the input area if it has content
     inputEditor.onDidPaste(() => {
       try {
         const raw = inputEditor.getValue();
         const formatted = JSON.stringify(JSON.parse(raw), null, 2);
         inputEditor.setValue(formatted);
-        if (formatted.trim() !== "") {
-          document.querySelector(".input-area").classList.add("focused");
-          document.querySelector(".input-area .editor-container").classList.add("has-content");
-        }
+        updateInputStyling();
       } catch (e) {
         console.error("Invalid JSON", e);
       }
     });
-    inputEditor.onDidFocusEditorText(() => {
-      document.querySelector(".input-area").classList.add("focused");
-      document.querySelector(".input-area .editor-container").classList.add("has-content");
-    });
-    inputEditor.onDidBlurEditorText(() => {
-      if (inputEditor.getValue().trim() === "") {
-        document.querySelector(".input-area").classList.remove("focused");
-        document.querySelector(".input-area .editor-container").classList.remove("has-content");
-      }
-    });
 
-    // Generate button logic
+    // Apply or remove styling on focus/blur
+    inputEditor.onDidFocusEditorText(updateInputStyling);
+    inputEditor.onDidBlurEditorText(updateInputStyling);
+
+    // Handle click on "Generate" button — send input to backend and display result
     document.getElementById("generate-btn").addEventListener("click", () => {
       fetch("/process", {
         method: "POST",
@@ -125,8 +135,10 @@ window.addEventListener("load", () => {
         .then(res => res.json())
         .then(data => {
           outputEditor.setValue(data.printing_times);
-          const outArea = document.querySelector(".output-area"),
-            outCont = document.querySelector(".output-area .editor-container");
+
+          const outArea = document.querySelector(".output-area");
+          const outCont = document.querySelector(".output-area .editor-container");
+
           if (data.printing_times.trim() !== "") {
             outArea.classList.add("focused");
             outCont.classList.add("has-content");
@@ -138,11 +150,32 @@ window.addEventListener("load", () => {
         .catch(err => console.error("Error:", err));
     });
 
-    // Update font size dynamically on window resize
+    // Update editor font size when window is resized
     window.addEventListener("resize", () => {
-      const fontSize = adjustFontSize(); // Recalculate font size based on screen size
+      const fontSize = adjustFontSize();
       inputEditor.updateOptions({ fontSize });
       outputEditor.updateOptions({ fontSize });
     });
+
+    // Info modal: open and close behavior for the "How to Use" popup
+    const infoBtn = document.getElementById("info-button");
+    const infoModal = document.getElementById("info-modal");
+    const closeModal = document.querySelector(".info-modal .close");
+
+    if (infoBtn && infoModal && closeModal) {
+      infoBtn.addEventListener("click", () => {
+        infoModal.style.display = "block";
+      });
+
+      closeModal.addEventListener("click", () => {
+        infoModal.style.display = "none";
+      });
+
+      window.addEventListener("click", (event) => {
+        if (event.target === infoModal) {
+          infoModal.style.display = "none";
+        }
+      });
+    }
   });
 });

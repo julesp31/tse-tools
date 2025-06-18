@@ -18,11 +18,11 @@ def main(athena_query):
     scheduled_slots = get_scheduled_list(athena_query)
     
     # Compare and process times
-    available_oits = split_days(oit_slots, busy_slots, scheduled_slots)
-    printing_times = merge_excess_times(available_oits)
+    cleaned_busy_times = combine_lists(busy_slots, scheduled_slots)
+    available_oits = subtract_lists(oit_slots, cleaned_busy_times)
     
     # Optionally print each available time interval to the console
-    for start, end in printing_times.items():
+    for start, end in available_oits.items():
         print(f"{start} -> {end}")
     
     return printing_times
@@ -41,7 +41,7 @@ def process():
     
     # Build a list of lines from printing_times, formatting datetime objects as desired.
     lines = []
-    for key, value in printing_times.items():
+    for key, value in available_oits.items():
         # If key is a datetime, format it as "YYYY-MM-DD HH:MM:SS"; otherwise, use str()
         key_str = key.strftime("%Y-%m-%d %H:%M:%S") if hasattr(key, "strftime") else str(key)
         value_str = value.strftime("%Y-%m-%d %H:%M:%S") if hasattr(value, "strftime") else str(value)

@@ -17,7 +17,8 @@
 /***************************************************************
 * 2. Global Layout & Typography
 ***************************************************************/
-html, body {
+html,
+body {
   font-family: "Poppins", sans-serif;
   width: 100%;
   height: 100%;
@@ -28,7 +29,7 @@ html, body {
   align-items: center;
   overflow-x: hidden;
   background-color: #141416;
-    background-image: url("/static/oit/images/background.png");
+  background-image: url("../images/background.png");
   background-position: center right;
   background-size: cover;
   visibility: hidden;
@@ -104,6 +105,7 @@ body.loaded {
 }
 
 .dropdown-label {
+  display: flex;
   align-items: center;
   cursor: pointer;
   color: #EDEDED;
@@ -120,6 +122,7 @@ body.loaded {
   cursor: pointer;
   transition: transform 0.4s ease;
   flex-grow: 1;
+  text-align: right;
 }
 
 .sidebar-menu .menu i {
@@ -144,7 +147,7 @@ body.loaded {
   transition: max-height 0.4s ease, opacity 0.3s ease;
 }
 
-#dropdown-check:checked~.sub-menu {
+#dropdown-check:checked ~ .sub-menu {
   max-height: 200px;
   transition: 0.8s ease;
   opacity: 1;
@@ -224,8 +227,8 @@ body.loaded {
 
 .sidebar-menu .social-media i:hover {
   opacity: 1;
-  transition: all 0.3s linear;
-  transform: scale(1.01);
+  transition: all 0.2s linear;
+  transform: scale(1.05);
 }
 
 /***************************************************************
@@ -237,7 +240,7 @@ body.loaded {
 
 .main-box .btn-one i {
   color: #EDEDED;
-  font-size: 30px;
+  font-size: 35px;
   font-weight: 700;
   position: absolute;
   left: 16px;
@@ -260,37 +263,32 @@ body.loaded {
 }
 
 .btn-one i:hover {
-  font-size: 36px;
+  font-size: 40px;
 }
 
 .btn-two i:hover {
   font-size: 36px;
 }
 
-#check:checked~.sidebar-menu {
+#check:checked ~ .sidebar-menu {
   left: 0;
 }
 
-#dropdown-check:checked~.sub-menu {
-  max-height: 200px;
-  opacity: 1;
-}
-
-#dropdown-check:checked+.dropdown-label .dropdown-icon {
+#dropdown-check:checked + .dropdown-label .dropdown-icon {
   transform: rotate(90deg);
   transition: transform 0.6s ease;
 }
 
-#dropdown-check:not(:checked)+.dropdown-label .dropdown-icon {
+#dropdown-check:not(:checked) + .dropdown-label .dropdown-icon {
   transform: rotate(-90deg);
   transition: transform 0.6s ease;
 }
 
-#check:checked~.btn-one i {
+#check:checked ~ .btn-one i {
   opacity: 0;
 }
 
-#check:checked~.sidebar-menu .btn-two i {
+#check:checked ~ .sidebar-menu .btn-two i {
   opacity: 1;
 }
 
@@ -327,9 +325,9 @@ body.loaded {
 }
 
 #check:checked ~ .hero {
-	left: calc((100% + 240px) / 2);
-	transform: translateX(-50%);
-	transition: left 0.4s linear, transform 0.4s linear;
+  left: calc((100% + 240px) / 2);
+  transform: translateX(-50%);
+  transition: left 0.4s linear, transform 0.4s linear;
 }
 
 /***************************************************************
@@ -389,16 +387,16 @@ body.loaded {
 }
 
 #check:checked ~ .text-container {
-	left: calc((100% + 240px) / 2);
-	transform: translateX(-50%);
-	width: calc(100% - 50px);
-	transition: left 0.4s linear, transform 0.4s linear, width 0.4s linear;
-  }
-  
-  #check:checked ~ .text-container .input-area,
-  #check:checked ~ .text-container .output-area {
-	width: 35vw;
-  }
+  left: calc((100% + 240px) / 2);
+  transform: translateX(-50%);
+  width: calc(100% - 50px);
+  transition: left 0.4s linear, transform 0.4s linear, width 0.4s linear;
+}
+
+#check:checked ~ .text-container .input-area,
+#check:checked ~ .text-container .output-area {
+  width: 35vw;
+}
 
 /***************************************************************
 * 11. Floating Label Styling
@@ -414,15 +412,15 @@ body.loaded {
   padding: 0;
   line-height: normal;
   transform: translate(0, 32px) scale(1);
-  transition: transform 0.4s ease, color 0.4s ease, background 0.4s ease, padding 0.4s ease, line-height 0.4s ease;
+  transition: transform 0.4s ease, color 0.4s ease, background-color 0.4s ease, padding 0.4s ease, line-height 0.4s ease;
   pointer-events: none;
 }
 
 .output-area.focused .labelline,
-.input-area .editor-container:focus+.labelline,
-.input-area .editor-container.has-content+.labelline,
-.output-area .editor-container:focus+.labelline,
-.output-area .editor-container.has-content+.labelline {
+.input-area .editor-container:focus + .labelline,
+.input-area .editor-container.has-content + .labelline,
+.output-area .editor-container:focus + .labelline,
+.output-area .editor-container.has-content + .labelline {
   color: #FFC107;
   background: rgba(0, 0, 0, 1);
   padding: 0 12px;
@@ -432,8 +430,8 @@ body.loaded {
   z-index: 1;
 }
 
-.input-area .editor-container:not(:focus):not(.has-content)+.labelline,
-.output-area .editor-container:not(:focus):not(.has-content)+.labelline {
+.input-area .editor-container:not(:focus):not(.has-content) + .labelline,
+.output-area .editor-container:not(:focus):not(.has-content) + .labelline {
   transform: none;
   padding: 0;
   line-height: normal;
@@ -483,7 +481,6 @@ body.loaded {
 }
 
 #custom-context-menu .menu-item:hover {
-  background: transparent;
   color: #FFC107;
   box-shadow: 0 0 4px rgba(255, 255, 255, 0.5);
 }
@@ -503,22 +500,25 @@ body.loaded {
   padding: 5px 10px;
   background-color: #141416;
   color: #FFC107;
-  border: 1.5px solid #EDEDED;
+  border: 1px solid #EDEDED;
   border-radius: 10px;
   cursor: pointer;
-  transition: 0.6s all ease;
+  transition:
+    background-color 0.6s ease,
+    color 0.6s ease,
+    transform 0.3s ease;
   font-size: clamp(0.2rem, 1.5vw, 1.3rem);
   overflow: hidden;
   text-align: center;
   white-space: nowrap;
+  position: relative;
+  z-index: 0;
 }
 
 #generate-btn:hover {
   background-color: #EDEDED;
   color: #141416;
-  border: 2px solid #FFC107;
   transform: scale(1.05);
-  transition: 0.6s all ease;
 }
 
 .btn-content {
@@ -527,30 +527,28 @@ body.loaded {
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-#generate-btn:hover .btn-content {
-  font-size: inherit;
+  position: relative;
+  z-index: 1;
 }
 
 #generate-btn::before {
   content: "";
   position: absolute;
   top: 0;
-  left: 50%;
-  right: 50%;
+  left: 0;
+  right: 0;
   bottom: 0;
   background-color: #EDEDED;
   opacity: 0;
+  transform: scaleX(0);
+  transform-origin: center;
   z-index: -1;
-  transition: 0.6s all ease;
+  transition: transform 0.6s ease, opacity 0.6s ease;
 }
 
 #generate-btn:hover::before {
-  left: 0;
-  right: 0;
+  transform: scaleX(1);
   opacity: 1;
-  transition: 0.6s all ease;
 }
 
 #generate-btn div {
@@ -566,42 +564,156 @@ body.loaded {
 }
 
 /***************************************************************
-* 15. Responsive Adjustments
+* 15. Info Button
+***************************************************************/
+#info-button {
+  position: fixed;
+  top: 12px;
+  right: 12px;
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  z-index: 999;
+  cursor: pointer;
+  transition: 0.3s linear;
+}
+
+#info-button i {
+  font-size: 35px;
+  color: #FFC107;
+  transition: 0.3s linear;
+}
+
+#info-button:hover i {
+  font-size: 38px;
+  color: #EDEDED;
+}
+
+/***************************************************************
+* 16. Info Modal
+***************************************************************/
+.info-modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.info-modal-content {
+  background-color: #1e1e1e;
+  color: #EDEDED;
+  margin: 11% auto;
+  padding: 30px 30px 40px;
+  border: 1px solid #888;
+  width: 80%;
+  max-width: 560px;
+  border-radius: 10px;
+  position: relative;
+}
+
+.info-modal-content h2 {
+  margin-bottom: 20px;
+}
+
+.info-modal-content .close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  z-index: 1001;
+}
+
+.info-modal-content .close i {
+  font-size: 22px;
+  color: #EDEDED;
+  opacity: 0;
+  transition: 0.3s linear;
+  font-weight: 700;
+}
+
+.info-modal-content .close i:hover {
+  opacity: 1;
+  color: #FFC107;
+}
+
+.info-modal-content:hover .close i {
+  opacity: 1;
+}
+
+.modal-steps {
+  list-style-type: decimal;
+  padding-left: 20px;
+  font-size: 1rem;
+  color: #EDEDED;
+}
+
+.modal-steps li {
+  margin-bottom: 14px;
+  line-height: 1.6;
+}
+
+.modal-steps li::marker {
+  color: #FFC107;
+  font-weight: 500;
+}
+
+.soft-highlight {
+  color: #FFC107;
+  font-weight: 500;
+}
+
+.inline-button-img {
+  height: 36px;
+  vertical-align: middle;
+  margin: 0 6px -3px 6px;
+  overflow: hidden;
+  display: inline-block;
+}
+
+/***************************************************************
+* 17. Responsive Adjustments
 ***************************************************************/
 @media only screen and (max-width: 1440px) {
-
-	#check:checked ~ .hero {
-	  left: calc((100% + 240px) / 2);
-	  transform: translateX(-50%);
-	  transition: left 0.4s linear, transform 0.4s linear;
-	}
-  
-	#check:checked ~ .text-container {
-	  left: calc((100% + 240px) / 2);
-	  width: calc(100% - 120px);
-	  transition: left 0.4s linear, transform 0.4s linear, width 0.4s linear;
-	}
-  
-	#check:checked ~ .text-container .input-area,
-	#check:checked ~ .text-container .output-area {
-	  width: 32vw;
-	}
-  
-	#check:checked ~ .hero .hero-content h1 {
-	  font-size: 1.8em;
-	  transition: font-size 0.4s linear;
-	}
-  
-	#check:checked ~ .hero .hero-content p {
-	  font-size: clamp(0.9rem, 1.8vw, 1rem);
-	  transition: font-size 0.4s linear;
-	}
-  
-	#custom-context-menu {
-	  font-size: 0.9rem;
-	}
-  
-	#custom-context-menu .menu-item {
-	  font-size: 0.9rem;
-	}
+  #check:checked ~ .hero {
+    left: calc((100% + 240px) / 2);
+    transform: translateX(-50%);
+    transition: left 0.4s linear, transform 0.4s linear;
   }
+
+  #check:checked ~ .text-container {
+    left: calc((100% + 240px) / 2);
+    width: calc(100% - 120px);
+    transition: left 0.4s linear, transform 0.4s linear, width 0.4s linear;
+  }
+
+  #check:checked ~ .text-container .input-area,
+  #check:checked ~ .text-container .output-area {
+    width: 32vw;
+  }
+
+  #check:checked ~ .hero .hero-content h1 {
+    font-size: 1.8em;
+    transition: font-size 0.4s linear;
+  }
+
+  #check:checked ~ .hero .hero-content p {
+    font-size: clamp(0.9rem, 1.8vw, 1rem);
+    transition: font-size 0.4s linear;
+  }
+
+  #custom-context-menu {
+    font-size: 0.9rem;
+  }
+
+  #custom-context-menu .menu-item {
+    font-size: 0.9rem;
+  }
+
+  #info-button {
+    transform: scale(0.9);
+  }
+}

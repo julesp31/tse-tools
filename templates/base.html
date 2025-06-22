@@ -12,8 +12,11 @@
   <script src="https://kit.fontawesome.com/f89168b549.js"></script>
   <!-- JSON5 -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/json5/2.2.1/index.min.js"></script>
+  
   <!-- Styles -->
-  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}" />
+  {% block styles %}
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='oit/style.css') }}" />
+  {% endblock %}
 </head>
 
 <body>
@@ -53,8 +56,13 @@
             </label>
             <ul class="sub-menu">
               <li class="sub-heading">
-                <a href="#oit-formatter">
+                <a href="{{ url_for('open_interview_times') }}">
                   <span class="sub-heading-text">Open Interview Times</span>
+                </a>
+              </li>
+              <li class="sub-heading">
+                <a href="{{ url_for('comma_separated_list') }}">
+                  <span class="sub-heading-text">Comma Separated List</span>
                 </a>
               </li>
             </ul>
@@ -158,12 +166,8 @@
     <!-- Hero Section -->
     <header class="hero">
       <div class="hero-content">
-        <h1>Open Interview Times Formatter</h1>
-        <p>
-          Fetches a User's Open Interview Times (OITs) at the time the candidate's interview is requested.
-          <br />
-          This considers the free/busy times we gather from a User's integrated external calendar and their Paradox availability.
-        </p>
+        <h1>{% block heading %}Tool Title{% endblock %}</h1>
+		<p>{% block description %}Short description about the tool goes here.{% endblock %}</p>
       </div>
     </header>
 
@@ -198,25 +202,14 @@
     <div id="info-modal" class="info-modal">
       <div class="info-modal-content">
         <label class="close"><i class="fas fa-times"></i></label>
-
-        <h2>How to Use</h2>
-        <ol class="modal-steps">
-          <li>Copy the Athena payload from your source</li>
-          <li>Paste it into the <span class="soft-highlight">"Copy-paste your text here"</span> box</li>
-          <li>
-            Click the
-            <img src="{{ url_for('static', filename='images/generate-button.png') }}" alt="Generate button" class="inline-button-img" />
-            button
-          </li>
-          <li>View results in the <span class="soft-highlight">"Open Interview Times (OITs) in UTC"</span> box</li>
-        </ol>
+        {% block modal_content %}{% endblock %}
       </div>
     </div>
   </div>
 
   <!-- Scripts -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/json5/2.2.1/index.min.js"></script>
-  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+  <script src="{{ url_for('static', filename='oit/script.js') }}"></script>
 </body>
 
 </html>

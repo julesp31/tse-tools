@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='oit/style.css') }}">
+{% endblock %}
+
+{% block title %}Open Interview Times Formatter | TSE Tools{% endblock %}
+{% block heading %}Open Interview Times Formatter{% endblock %}
+{% block description %}
+Fetches a User's Open Interview Times (OITs) at the time the candidate's interview is requested.<br/>
+This considers the free/busy times we gather from a User's integrated external calendar and their Paradox availability.
+{% endblock %}
+
+{% block modal_content %}
+<h2>How to Use</h2>
+<ol class="modal-steps">
+  <li>Copy the Athena payload from your source</li>
+  <li>
+    Paste it into the
+    <span class="soft-highlight">"Copy-paste your text here"</span> box
+  </li>
+  <li>
+    Click the
+    <img src="{{ url_for('static', filename='images/generate-button.png') }}" alt="Generate button"
+      class="inline-button-img" />
+    button
+  </li>
+  <li>
+    View results in the
+    <span class="soft-highlight">"Open Interview Times (OITs) in UTC"</span> box
+  </li>
+</ol>
+{% endblock %}
+
+{% block scripts %}
+<!-- Monaco Loader -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.39.0/min/vs/loader.min.js"></script>
+<!-- Shared Monaco Setup -->
+<script src="{{ url_for('static', filename='common/monaco-setup.js') }}"></script>
+<!-- OIT specific logic -->
+<script src="{{ url_for('static', filename='oit/script.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='comma/style.css') }}">
+{% endblock %}
+
+{% block title %}Comma Separated List | TSE Tools{% endblock %}
+{% block heading %}Comma Separated List Formatter{% endblock %}
+{% block description %}
+Quickly convert lists into clean, comma-separated formats for use in data entry, spreadsheets, or code.<br/>
+Perfect for simplifying raw inputs, reformatting copy-pasted lists, and saving time on repetitive tasks.
+{% endblock %}
+
+{% block modal_content %}
+<h2>How to Use</h2>
+<ol class="modal-steps">
+  <li>Copy your raw list (e.g., names, IDs, values) from any source</li>
+  <li>
+    Paste it into the
+    <span class="soft-highlight">"Copy-paste your text here"</span> box
+  </li>
+  <li>
+    Click the
+    <img src="{{ url_for('static', filename='images/generate-button.png') }}" alt="Generate button"
+      class="inline-button-img" />
+    button
+  </li>
+  <li>
+    View the formatted comma-separated list in the
+    <span class="soft-highlight">output box</span>
+  </li>
+</ol>
+{% endblock %}
+
+{% block scripts %}
+<!-- Monaco Loader -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.39.0/min/vs/loader.min.js"></script>
+<!-- Shared Monaco Setup -->
+<script src="{{ url_for('static', filename='common/monaco-setup.js') }}"></script>
+<!-- OIT specific logic -->
+<script src="{{ url_for('static', filename='comma/script.js') }}"></script>
+{% endblock %}

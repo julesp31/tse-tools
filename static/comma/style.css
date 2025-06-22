@@ -28,8 +28,7 @@ body {
   justify-content: center;
   align-items: center;
   overflow-x: hidden;
-  background-color: #141416;
-  background-image: url("../images/background.png");
+  background-color: #FCFCFC;
   background-position: center right;
   background-size: cover;
   visibility: hidden;
@@ -54,8 +53,10 @@ body.loaded {
   height: 100vh;
   width: 240px;
   left: -240px;
-  background: rgba(0, 0, 0, 0.6);
-  box-shadow: 0px 0px 6px rgba(255, 255, 255, 0.5);
+  background: #FCFCFC; /* CHANGED THIS */
+  box-shadow:
+  0 4px 12px rgba(0, 0, 0, 0.08),
+  inset -1px 0 0 rgba(0, 0, 0, 0.05);
   overflow: hidden;
   transition: all 0.4s linear;
   z-index: 99;
@@ -69,7 +70,7 @@ body.loaded {
 }
 
 .sidebar-menu .logo a {
-  color: #EDEDED;
+  color: #25C9D0; /* CHANGED THIS */
   font-size: 22px;
   font-weight: 500;
   position: absolute;
@@ -109,7 +110,7 @@ body.loaded {
   display: flex;
   align-items: center;
   cursor: pointer;
-  color: #EDEDED;
+  color: #555; /* CHANGED THIS */
   font-size: 16px;
   text-decoration: none;
   transition: transform 0.4s ease;
@@ -117,7 +118,7 @@ body.loaded {
 
 .dropdown-label .dropdown-icon {
   font-size: 24px;
-  color: #EDEDED;
+  color: #555; /* CHANGED THIS */
   margin-top: 4px;
   float: right;
   cursor: pointer;
@@ -127,13 +128,13 @@ body.loaded {
 }
 
 .sidebar-menu .menu i {
-  color: #EDEDED;
+  color: #555;  /* CHANGED THIS */
   font-size: 16px;
   padding-right: 8px;
 }
 
 .sidebar-menu .menu a {
-  color: #EDEDED;
+  color: #555;  /* CHANGED THIS */
   font-size: 16px;
   text-decoration: none;
 }
@@ -169,22 +170,26 @@ body.loaded {
 * 6. Hover Effects for Menu Items
 ***************************************************************/
 .sidebar-menu .menu li:hover {
-  border-left: 1px solid #EDEDED;
-  box-shadow: 0 0 4px rgba(255, 255, 255, 0.5);
+  border-left: 2px solid #25C9D0; /* CHANGED THIS */
+  box-shadow:
+    inset 2px 0 0 #25C9D0, 
+    0 0 10px rgba(255, 255, 255, 0.9); /* darkened #FCFCFC glow */
+  background-color: rgba(227, 246, 248, 0.6);
 }
 
 .sidebar-menu .menu .sub-menu li.sub-heading:hover {
-  border-left: 1px solid #EDEDED;
+  border-left: 2px solid #25C9D0; /* CHANGED THIS */
+  background-color: rgba(227, 246, 248, 0.6); /* slightly darker */
 }
 
 .sidebar-menu .menu .sub-menu li.sub-heading:hover a .sub-heading-text {
-  color: #FFC107;
+  color: #25C9D0; /* CHANGED THIS */
   transition: color 0.4s ease;
 }
 
 .dropdown-icon:hover,
 .dropdown-label:hover {
-  color: #FFC107;
+  color: #25C9D0; /* CHANGED THIS */
   transition: color 0.4s ease;
 }
 
@@ -195,9 +200,10 @@ body.loaded {
 
 .sidebar-menu .menu li:hover .menu-header span,
 .sidebar-menu .menu li:hover .menu-header i {
-  color: #FFC107;
+  color: #25C9D0; /* CHANGED THIS */
   transition: color 0.4s ease;
 }
+
 
 /***************************************************************
 * 7. Sidebar Social Media Links
@@ -220,7 +226,7 @@ body.loaded {
 
 .sidebar-menu .social-media i {
   padding: 0 10px;
-  color: #EDEDED;
+  color: #25C9D0; /* CHANGED THIS */
   opacity: 0.6;
   font-size: 18px;
   text-decoration: none;
@@ -240,7 +246,7 @@ body.loaded {
 }
 
 .main-box .btn-one i {
-  color: #EDEDED;
+  color: #25C9D0; /* CHANGED THIS */
   font-size: 35px;
   font-weight: 700;
   position: absolute;
@@ -259,7 +265,7 @@ body.loaded {
   left: 205px;
   cursor: pointer;
   opacity: 0;
-  color: #EDEDED;
+  color: #25C9D0; /* CHANGED THIS */
   transition: 0.3s linear;
 }
 
@@ -300,8 +306,8 @@ body.loaded {
   position: relative;
   left: 50%;
   transform: translateX(-50%);
-  background-color: rgba(0, 0, 0, 0.3);
-  color: #EDEDED;
+  background-color: rgba(227, 246, 248, 0.6); /* CHANGED THIS */
+  color: #555; /* CHANGED THIS */
   text-align: center;
   padding: 15px 40px;
   margin-bottom: 35px;
@@ -320,7 +326,7 @@ body.loaded {
 }
 
 .hero-content p {
-  color: #FFC107;
+  color: #25C9D0; /* CHANGED THIS */
   font-size: clamp(1rem, 2vw, 1.2rem);
   transition: font-size 0.4s linear;
 }
@@ -371,8 +377,8 @@ body.loaded {
   font-size: 1em;
   line-height: 1.8;
   border-radius: 10px;
-  border: 1px solid #EDEDED;
-  background: rgba(0, 0, 0, 0.6);
+  border: 1px solid #CCC; /* CHANGED THIS */
+  background: #f8f8f8; /* CHANGED THIS */
   color: #EDEDED;
   transition: 0.4s ease;
   resize: none;
@@ -383,7 +389,7 @@ body.loaded {
 .input-area.focused .editor-container,
 .output-area.focused .editor-container {
   color: #EDEDED;
-  border: 2px solid #FFC107;
+  border: 2px solid #25C9D0; /* CHANGED THIS */
   transition: color 0.4s linear;
 }
 
@@ -422,8 +428,8 @@ body.loaded {
 .input-area .editor-container.has-content + .labelline,
 .output-area .editor-container:focus + .labelline,
 .output-area .editor-container.has-content + .labelline {
-  color: #FFC107;
-  background: rgba(0, 0, 0, 1);
+  color: #25C9D0; /* CHANGED THIS */
+  background: #FCFCFC; /* CHANGED THIS */
   padding: 0 12px;
   line-height: 30px;
   transform: translate(-32px, -32px) scale(0.88);
@@ -437,14 +443,14 @@ body.loaded {
   padding: 0;
   line-height: normal;
   background: transparent;
-  color: #EDEDED;
+  color: #555; /* CHANGED THIS */
 }
 
 /***************************************************************
 * 12. Monaco Editor Background & Scrollbar
 ***************************************************************/
 .monaco-editor .monaco-editor-background {
-  background-color: rgba(0, 0, 0, 0.6) !important;
+  background-color: #f8f8f8 !important; /* CHANGED THIS */
 }
 
 .editor-container::-webkit-scrollbar {
@@ -499,9 +505,10 @@ body.loaded {
   max-width: 150px;
   min-height: 8vh;
   padding: 5px 10px;
-  background-color: #141416;
-  color: #FFC107;
-  border: 1px solid #EDEDED;
+  background-color: #e3f7f8; /* CHANGED THIS */
+  color: #25c9d0; /* CHANGED THIS */
+  border: 1px solid rgba(0, 0, 0, 0.01); /* CHANGED THIS */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* CHANGED THIS */
   border-radius: 10px;
   cursor: pointer;
   transition:
@@ -517,8 +524,10 @@ body.loaded {
 }
 
 #generate-btn:hover {
-  background-color: #EDEDED;
-  color: #141416;
+  background-color: #FCFCFC; /* CHANGED THIS */
+  color: black; /* CHANGED THIS */
+  border: 1px solid #25c9d0; /* CHANGED THIS */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* CHANGED THIS */
   transform: scale(1.05);
 }
 
@@ -539,7 +548,7 @@ body.loaded {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #EDEDED;
+  background-color: #FCFCFC; /* CHANGED THIS */
   opacity: 0;
   transform: scaleX(0);
   transform-origin: center;
@@ -581,13 +590,13 @@ body.loaded {
 
 #info-button i {
   font-size: 35px;
-  color: #FFC107;
+  color: #25C9D0;
   transition: 0.3s linear;
 }
 
 #info-button:hover i {
   font-size: 38px;
-  color: #EDEDED;
+  color: #555;
 }
 
 /***************************************************************
@@ -638,7 +647,7 @@ body.loaded {
 
 .info-modal-content .close i:hover {
   opacity: 1;
-  color: #FFC107;
+  color: #25c9d0; /* CHANGED THIS */
 }
 
 .info-modal-content:hover .close i {
@@ -658,12 +667,12 @@ body.loaded {
 }
 
 .modal-steps li::marker {
-  color: #FFC107;
+  color: #25c9d0; /* CHANGED THIS */
   font-weight: 500;
 }
 
 .soft-highlight {
-  color: #FFC107;
+  color: #25c9d0; /* CHANGED THIS */
   font-weight: 500;
 }
 

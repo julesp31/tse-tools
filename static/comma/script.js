@@ -15,7 +15,7 @@ window.addEventListener("load", () => {
     const commonOpts = {
       fontFamily: 'JetBrains Mono, monospace',
       language: "plaintext",
-      theme: "vs-dark",
+      theme: "vs",
       automaticLayout: true,
       minimap: { enabled: false },
       scrollBeyondLastLine: false,

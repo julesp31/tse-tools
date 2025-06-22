@@ -8,6 +8,8 @@
 
   <!-- JSON5 library for JSON parsing-->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/json5/2.2.1/index.min.js"></script>
+  <!-- Monaco loader (must be before monaco-setup.js so `require` is available) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.39.0/min/vs/loader.js"></script>
   <!-- Monaco Setup (must come after loader.js) -->
   <script src="{{ url_for('static', filename='common/monaco-setup.js') }}"></script>
   <!-- FontAwesome icon library-->

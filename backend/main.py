@@ -129,9 +129,7 @@ def comma_tool():
     data = request.get_json()
     input_text = data.get("text", "")
 
-    # Basic comma formatting (preserving input order)
-    items = [item.strip() for item in input_text.splitlines() if item.strip()]
-    formatted = ", ".join(items)
+    formatted = format_list(input_text)
 
     return jsonify({"formatted": formatted})
 

@@ -6,13 +6,13 @@
   <meta name="viewport" content="width=device-width,initial-scale=1.0" />
   <title>TSE Tools | Paradox</title>
 
-  <!-- Monaco Editor -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.39.0/min/vs/loader.js"></script>
-  <!-- FontAwesome -->
-  <script src="https://kit.fontawesome.com/f89168b549.js"></script>
-  <!-- JSON5 -->
+  <!-- JSON5 library for JSON parsing-->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/json5/2.2.1/index.min.js"></script>
-  
+  <!-- Monaco Setup (must come after loader.js) -->
+  <script src="{{ url_for('static', filename='common/monaco-setup.js') }}"></script>
+  <!-- FontAwesome icon library-->
+  <script src="https://kit.fontawesome.com/f89168b549.js"></script>
+
   <!-- Styles -->
   {% block styles %}
   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='oit/style.css') }}" />
@@ -167,7 +167,7 @@
     <header class="hero">
       <div class="hero-content">
         <h1>{% block heading %}Tool Title{% endblock %}</h1>
-		<p>{% block description %}Short description about the tool goes here.{% endblock %}</p>
+        <p>{% block description %}Short description about the tool{% endblock %}</p>
       </div>
     </header>
 
@@ -208,8 +208,7 @@
   </div>
 
   <!-- Scripts -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/json5/2.2.1/index.min.js"></script>
-  <script src="{{ url_for('static', filename='oit/script.js') }}"></script>
+  {% block scripts %}{% endblock %}
 </body>
 
 </html>

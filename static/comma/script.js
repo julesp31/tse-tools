@@ -3,15 +3,8 @@ window.addEventListener("load", () => {
   // Make the body visible after load (used to prevent flash of unstyled content)
   document.body.classList.add("loaded");
 
-  // Configure Monaco to load from CDN
-  require.config({
-    paths: {
-      vs: "https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.39.0/min/vs"
-    }
-  });
-
   // Load the Monaco Editor and set up editors, context menus, and button logic
-  require(["vs/editor/editor.main"], () => {
+  loadMonacoEditor(() => {
 
     // Adjust editor font size depending on screen width
     function adjustFontSize() {

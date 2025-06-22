@@ -33,10 +33,6 @@ Perfect for simplifying raw inputs, reformatting copy-pasted lists, and saving t
 {% endblock %}
 
 {% block scripts %}
-<!-- Monaco Loader -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.39.0/min/vs/loader.min.js"></script>
-<!-- Shared Monaco Setup -->
-<script src="{{ url_for('static', filename='common/monaco-setup.js') }}"></script>
-<!-- OIT specific logic -->
+<!-- Comma specific logic -->
 <script src="{{ url_for('static', filename='comma/script.js') }}"></script>
 {% endblock %}

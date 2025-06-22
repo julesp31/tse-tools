@@ -1,7 +1,9 @@
 import re
 
 def format_list(text, delimiter=",", item_prefix="", item_suffix="", result_prefix="", result_suffix="", deduplicate=False):
-    items = [item.strip() for item in text.splitlines() if item.strip()]
+    # Split by any whitespace or line breaks
+    items = [item.strip() for item in re.split(r'[\s\n\r]+', text) if item.strip()]
+    
     if deduplicate:
         seen = set()
         unique_items = []

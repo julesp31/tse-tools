@@ -3,12 +3,13 @@ import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from flask import Flask, request, render_template, jsonify
-from backend.oit_formatter.free_busy_times import get_busy_list
-from backend.oit_formatter.oit_slots import get_oit_list
-from backend.oit_formatter.scheduled_times import get_scheduled_list
-from backend.oit_formatter.combining_busy_times import combine_lists
-from backend.oit_formatter.times_comparer import subtract_lists
+from backend.open_interview_times.free_busy_times import get_busy_list
+from backend.open_interview_times.oit_slots import get_oit_list
+from backend.open_interview_times.scheduled_times import get_scheduled_list
+from backend.open_interview_times.combining_busy_times import combine_lists
+from backend.open_interview_times.times_comparer import subtract_lists
 from datetime import datetime
+from backend.comma_separated_list.comma_formatter import format_list
 
 app = Flask(__name__, 
             static_folder=os.path.join(os.path.dirname(__file__), '..', 'static'), 
@@ -123,9 +124,17 @@ def process():
     
     return jsonify(output)
 
-@app.route("/comma", methods=["GET", "POST"])
+@app.route("/comma", methods=["POST"])
 def comma_tool():
-    return render_template("comma/index.html")
+    data = request.get_json()
+    input_text = data.get("text", "")
+
+    # Basic comma formatting (preserving input order)
+    items = [item.strip() for item in input_text.splitlines() if item.strip()]
+    formatted = ", ".join(items)
+
+    return jsonify({"formatted": formatted})
+
 
 if __name__ == "__main__":
     app.run(debug=True, port=5000)

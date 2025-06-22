@@ -12,8 +12,6 @@ window.addEventListener("load", () => {
 
   // Load the Monaco Editor and set up editors, context menus, and button logic
   require(["vs/editor/editor.main"], () => {
-    // Disable built-in JSON validation errors
-    monaco.languages.json.jsonDefaults.setDiagnosticsOptions({ validate: false });
 
     // Adjust editor font size depending on screen width
     function adjustFontSize() {
@@ -23,7 +21,7 @@ window.addEventListener("load", () => {
     // Shared Monaco editor settings for both input and output editors
     const commonOpts = {
       fontFamily: 'JetBrains Mono, monospace',
-      language: "json",
+      language: "plaintext",
       theme: "vs-dark",
       automaticLayout: true,
       minimap: { enabled: false },
@@ -82,7 +80,6 @@ window.addEventListener("load", () => {
       createMenu(inputEditor, [
         { label: "Copy", command: "editor.action.clipboardCopyAction" },
         { label: "Paste", command: "editor.action.clipboardPasteAction" },
-        { label: "Format", command: "editor.action.formatDocument" }
       ], e.pageX, e.pageY);
     });
 
@@ -109,16 +106,9 @@ window.addEventListener("load", () => {
       inputCont.classList.toggle("has-content", hasContent);
     }
 
-    // Auto-format input JSON after pasting, and style the input area if it has content
+    // Style the input area if it has content
     inputEditor.onDidPaste(() => {
-      try {
-        const raw = inputEditor.getValue();
-        const formatted = JSON.stringify(JSON.parse(raw), null, 2);
-        inputEditor.setValue(formatted);
-        updateInputStyling();
-      } catch (e) {
-        console.error("Invalid JSON", e);
-      }
+      updateInputStyling();
     });
 
     // Apply or remove styling on focus/blur
@@ -127,19 +117,24 @@ window.addEventListener("load", () => {
 
     // Handle click on "Generate" button — send input to backend and display result
     document.getElementById("generate-btn").addEventListener("click", () => {
-      fetch("/process", {
+      const input = inputEditor.getValue();
+      const endpoint = "/comma"; // Endpoint for comma-separated list formatter
+      const body = { text: input };
+
+      fetch(endpoint, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ text: inputEditor.getValue() })
+        body: JSON.stringify(body)
       })
         .then(res => res.json())
         .then(data => {
-          outputEditor.setValue(data.printing_times);
+          const result = data.printing_times || data.formatted || "";  // supports both tools
+          outputEditor.setValue(result);
 
           const outArea = document.querySelector(".output-area");
           const outCont = document.querySelector(".output-area .editor-container");
 
-          if (data.printing_times.trim() !== "") {
+          if (result.trim() !== "") {
             outArea.classList.add("focused");
             outCont.classList.add("has-content");
           } else {

@@ -29,6 +29,7 @@ def main(athena_query):
     cleaned_busy_times = combine_lists(busy_slots, scheduled_slots)
     available_oits = subtract_lists(oit_slots, cleaned_busy_times)
 
+    return available_oits
 
 # Shows the same page for the root www.tsetools.com and OITs page URL
 @app.route("/", methods=["GET", "POST"])

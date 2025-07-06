@@ -412,16 +412,14 @@ body.loaded {
   background: transparent;
   padding: 0;
   line-height: normal;
-  transform: translate(0, 32px) scale(1);
+  transform: translate(0, 3px) scale(1);
   transition: transform 0.4s ease, color 0.4s ease, background-color 0.4s ease, padding 0.4s ease, line-height 0.4s ease;
   pointer-events: none;
 }
 
-.output-area.focused .labelline,
-.input-area .editor-container:focus + .labelline,
-.input-area .editor-container.has-content + .labelline,
-.output-area .editor-container:focus + .labelline,
-.output-area .editor-container.has-content + .labelline {
+.input-area.focused .labelline,
+.input-area.has-content .labelline,
+.output-area.has-content .labelline {
   color: #FFC107;
   background: rgba(0, 0, 0, 1);
   padding: 0 12px;
@@ -429,15 +427,6 @@ body.loaded {
   transform: translate(-32px, -32px) scale(0.88);
   transition: 0.4s ease;
   z-index: 1;
-}
-
-.input-area .editor-container:not(:focus):not(.has-content) + .labelline,
-.output-area .editor-container:not(:focus):not(.has-content) + .labelline {
-  transform: none;
-  padding: 0;
-  line-height: normal;
-  background: transparent;
-  color: #EDEDED;
 }
 
 /***************************************************************

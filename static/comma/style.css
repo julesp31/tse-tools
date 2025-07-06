@@ -53,7 +53,7 @@ body.loaded {
   height: 100vh;
   width: 240px;
   left: -240px;
-  background: #FCFCFC; /* CHANGED THIS */
+  background: #FCFCFC;
   box-shadow:
   0 4px 12px rgba(0, 0, 0, 0.08),
   inset -1px 0 0 rgba(0, 0, 0, 0.05);
@@ -70,7 +70,7 @@ body.loaded {
 }
 
 .sidebar-menu .logo a {
-  color: #25C9D0; /* CHANGED THIS */
+  color: #25C9D0;
   font-size: 22px;
   font-weight: 500;
   position: absolute;
@@ -110,7 +110,7 @@ body.loaded {
   display: flex;
   align-items: center;
   cursor: pointer;
-  color: #555; /* CHANGED THIS */
+  color: #555;
   font-size: 16px;
   text-decoration: none;
   transition: transform 0.4s ease;
@@ -118,7 +118,7 @@ body.loaded {
 
 .dropdown-label .dropdown-icon {
   font-size: 24px;
-  color: #555; /* CHANGED THIS */
+  color: #555;
   margin-top: 4px;
   float: right;
   cursor: pointer;
@@ -128,13 +128,13 @@ body.loaded {
 }
 
 .sidebar-menu .menu i {
-  color: #555;  /* CHANGED THIS */
+  color: #555;
   font-size: 16px;
   padding-right: 8px;
 }
 
 .sidebar-menu .menu a {
-  color: #555;  /* CHANGED THIS */
+  color: #555;
   font-size: 16px;
   text-decoration: none;
 }
@@ -170,26 +170,26 @@ body.loaded {
 * 6. Hover Effects for Menu Items
 ***************************************************************/
 .sidebar-menu .menu li:hover {
-  border-left: 2px solid #25C9D0; /* CHANGED THIS */
+  border-left: 2px solid #25C9D0;
   box-shadow:
     inset 2px 0 0 #25C9D0, 
-    0 0 10px rgba(255, 255, 255, 0.9); /* darkened #FCFCFC glow */
+    0 0 4px rgb(37,201,208,0.9);
   background-color: rgba(227, 246, 248, 0.6);
 }
 
 .sidebar-menu .menu .sub-menu li.sub-heading:hover {
-  border-left: 2px solid #25C9D0; /* CHANGED THIS */
-  background-color: rgba(227, 246, 248, 0.6); /* slightly darker */
+  border-left: 2px solid #25C9D0;
+  background-color: #FCFCFC;
 }
 
 .sidebar-menu .menu .sub-menu li.sub-heading:hover a .sub-heading-text {
-  color: #25C9D0; /* CHANGED THIS */
+  color: #25C9D0;
   transition: color 0.4s ease;
 }
 
 .dropdown-icon:hover,
 .dropdown-label:hover {
-  color: #25C9D0; /* CHANGED THIS */
+  color: #25C9D0;
   transition: color 0.4s ease;
 }
 
@@ -200,7 +200,7 @@ body.loaded {
 
 .sidebar-menu .menu li:hover .menu-header span,
 .sidebar-menu .menu li:hover .menu-header i {
-  color: #25C9D0; /* CHANGED THIS */
+  color: #25C9D0;
   transition: color 0.4s ease;
 }
 
@@ -226,7 +226,7 @@ body.loaded {
 
 .sidebar-menu .social-media i {
   padding: 0 10px;
-  color: #25C9D0; /* CHANGED THIS */
+  color: #25C9D0;
   opacity: 0.6;
   font-size: 18px;
   text-decoration: none;
@@ -246,7 +246,7 @@ body.loaded {
 }
 
 .main-box .btn-one i {
-  color: #25C9D0; /* CHANGED THIS */
+  color: #25C9D0;
   font-size: 35px;
   font-weight: 700;
   position: absolute;
@@ -265,7 +265,7 @@ body.loaded {
   left: 205px;
   cursor: pointer;
   opacity: 0;
-  color: #25C9D0; /* CHANGED THIS */
+  color: #25C9D0;
   transition: 0.3s linear;
 }
 
@@ -306,8 +306,8 @@ body.loaded {
   position: relative;
   left: 50%;
   transform: translateX(-50%);
-  background-color: rgba(227, 246, 248, 0.6); /* CHANGED THIS */
-  color: #555; /* CHANGED THIS */
+  background-color: rgba(227, 246, 248, 0.6); 
+  color: #555;
   text-align: center;
   padding: 15px 40px;
   margin-bottom: 35px;
@@ -326,7 +326,7 @@ body.loaded {
 }
 
 .hero-content p {
-  color: #25C9D0; /* CHANGED THIS */
+  color: #25C9D0;
   font-size: clamp(1rem, 2vw, 1.2rem);
   transition: font-size 0.4s linear;
 }
@@ -377,9 +377,9 @@ body.loaded {
   font-size: 1em;
   line-height: 1.8;
   border-radius: 10px;
-  border: 1px solid #CCC; /* CHANGED THIS */
-  background: #f8f8f8; /* CHANGED THIS */
-  color: #EDEDED;
+  border: 1px solid #CCC;
+  background: #FCFCFC;
+  color: #FCFCFC;
   transition: 0.4s ease;
   resize: none;
   text-align: left;
@@ -388,8 +388,8 @@ body.loaded {
 
 .input-area.focused .editor-container,
 .output-area.focused .editor-container {
-  color: #EDEDED;
-  border: 2px solid #25C9D0; /* CHANGED THIS */
+  color: #FCFCFC;
+  border: 2px solid #25C9D0;
   transition: color 0.4s linear;
 }
 
@@ -414,22 +414,20 @@ body.loaded {
   top: 17px;
   left: 10%;
   font-size: 16px;
-  color: #EDEDED;
+  color: #555;
   background: transparent;
   padding: 0;
   line-height: normal;
-  transform: translate(0, 32px) scale(1);
+  transform: translate(0, 3px) scale(1);
   transition: transform 0.4s ease, color 0.4s ease, background-color 0.4s ease, padding 0.4s ease, line-height 0.4s ease;
   pointer-events: none;
 }
 
-.output-area.focused .labelline,
-.input-area .editor-container:focus + .labelline,
-.input-area .editor-container.has-content + .labelline,
-.output-area .editor-container:focus + .labelline,
-.output-area .editor-container.has-content + .labelline {
-  color: #25C9D0; /* CHANGED THIS */
-  background: #FCFCFC; /* CHANGED THIS */
+.input-area.focused .labelline,
+.input-area.has-content .labelline,
+.output-area.has-content .labelline {
+  color: #25C9D0;
+  background: #FCFCFC;
   padding: 0 12px;
   line-height: 30px;
   transform: translate(-32px, -32px) scale(0.88);
@@ -437,20 +435,11 @@ body.loaded {
   z-index: 1;
 }
 
-.input-area .editor-container:not(:focus):not(.has-content) + .labelline,
-.output-area .editor-container:not(:focus):not(.has-content) + .labelline {
-  transform: none;
-  padding: 0;
-  line-height: normal;
-  background: transparent;
-  color: #555; /* CHANGED THIS */
-}
-
 /***************************************************************
 * 12. Monaco Editor Background & Scrollbar
 ***************************************************************/
 .monaco-editor .monaco-editor-background {
-  background-color: #f8f8f8 !important; /* CHANGED THIS */
+  background-color: #f8f8f8 !important;
 }
 
 .editor-container::-webkit-scrollbar {
@@ -471,11 +460,11 @@ body.loaded {
 ***************************************************************/
 #custom-context-menu {
   position: absolute;
-  background: #0c0c0c;
-  color: #EDEDED;
-  border: 1px solid rgba(255, 255, 255, 0.5);
+  background: #FCFCFC;
+  color: #555;
+  border: 1px solid #25C9D0;
   border-radius: 4px;
-  box-shadow: 0px 0px 6px rgba(255, 255, 255, 0.5);
+  box-shadow: 0px 0px 6px rgb(37,201,208,0.5);
   font-family: "Poppins", sans-serif;
   z-index: 10000;
 }
@@ -488,8 +477,8 @@ body.loaded {
 }
 
 #custom-context-menu .menu-item:hover {
-  color: #FFC107;
-  box-shadow: 0 0 4px rgba(255, 255, 255, 0.5);
+  color: #25C9D0;
+  box-shadow: 0 0 4px rgb(37,201,208,0.5);
 }
 
 /***************************************************************
@@ -505,10 +494,9 @@ body.loaded {
   max-width: 150px;
   min-height: 8vh;
   padding: 5px 10px;
-  background-color: #e3f7f8; /* CHANGED THIS */
-  color: #25c9d0; /* CHANGED THIS */
-  border: 1px solid rgba(0, 0, 0, 0.01); /* CHANGED THIS */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* CHANGED THIS */
+  background-color: #e3f7f8;
+  color: #25c9d0;
+  border: 1px solid #CCC;
   border-radius: 10px;
   cursor: pointer;
   transition:
@@ -516,7 +504,7 @@ body.loaded {
     color 0.6s ease,
     transform 0.3s ease;
   font-size: clamp(0.2rem, 1.5vw, 1.3rem);
-  overflow: hidden;
+  overflow: visible;
   text-align: center;
   white-space: nowrap;
   position: relative;
@@ -524,11 +512,66 @@ body.loaded {
 }
 
 #generate-btn:hover {
-  background-color: #FCFCFC; /* CHANGED THIS */
-  color: black; /* CHANGED THIS */
-  border: 1px solid #25c9d0; /* CHANGED THIS */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* CHANGED THIS */
+  background-color: #FCFCFC;
+  color: #141416;
+  border: 1px solid #25c9d0;
   transform: scale(1.05);
+}
+
+.star {
+  position: absolute;
+  pointer-events: none;
+  visibility: hidden;
+  opacity: 0;
+  transition:
+    opacity 0.3s ease,
+    transform 0.6s ease,
+    visibility 0s linear;
+}
+
+#generate-btn:hover .star {
+  opacity: 1;
+  visibility: visible;
+}
+
+#generate-btn:not(:hover) .star {
+  opacity: 0;
+  visibility: hidden;
+  transition-delay: 0s, 0s, 0.6s;
+}
+
+.star svg {
+  opacity: 0;
+  fill: #25c9d0;
+  transition: opacity 0.3s ease;
+  animation: sparkle 1.2s ease-in-out infinite;
+  animation-delay: inherit;
+}
+
+#generate-btn:hover .star svg {
+  opacity: 1;
+  filter: drop-shadow(0 0 6px #25c9d0);
+}
+
+.star-1 { top: 60%;    left: 33px; animation-delay: 0.6s; }
+.star-2 { top: 20%;    left: 27px; animation-delay: 0.9s; }
+.star-3 { bottom: -12px; left: 35px; animation-delay: 1.2s; }
+.star-4 { bottom: 84px; left: 34px; animation-delay: 1.5s; }
+
+.star-1 svg { width: 10px; height: 10px; }
+.star-2 svg { width: 10px; height: 10px; }
+.star-3 svg { width: 14px; height: 14px; }
+.star-4 svg { width: 14px; height: 14px; }
+
+@keyframes sparkle {
+  0%, 100% {
+    transform: scale(0.8) rotate(0deg);
+    opacity: 0.5;
+  }
+  50% {
+    transform: scale(1.2) rotate(15deg);
+    opacity: 1;
+  }
 }
 
 .btn-content {
@@ -544,20 +587,21 @@ body.loaded {
 #generate-btn::before {
   content: "";
   position: absolute;
+  border-radius: inherit;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #FCFCFC; /* CHANGED THIS */
+  background-color: #FCFCFC;
   opacity: 0;
-  transform: scaleX(0);
+  transform: scale(0);
   transform-origin: center;
   z-index: -1;
   transition: transform 0.6s ease, opacity 0.6s ease;
 }
 
 #generate-btn:hover::before {
-  transform: scaleX(1);
+  transform: scale(1);
   opacity: 1;
 }
 
@@ -596,7 +640,6 @@ body.loaded {
 
 #info-button:hover i {
   font-size: 38px;
-  color: #555;
 }
 
 /***************************************************************
@@ -620,7 +663,7 @@ body.loaded {
   padding: 30px 30px 40px;
   border: 1px solid #888;
   width: 80%;
-  max-width: 560px;
+  max-width: 570px;
   border-radius: 10px;
   position: relative;
 }
@@ -647,7 +690,7 @@ body.loaded {
 
 .info-modal-content .close i:hover {
   opacity: 1;
-  color: #25c9d0; /* CHANGED THIS */
+  color: #25c9d0;
 }
 
 .info-modal-content:hover .close i {
@@ -667,12 +710,12 @@ body.loaded {
 }
 
 .modal-steps li::marker {
-  color: #25c9d0; /* CHANGED THIS */
+  color: #25c9d0;
   font-weight: 500;
 }
 
 .soft-highlight {
-  color: #25c9d0; /* CHANGED THIS */
+  color: #25c9d0;
   font-weight: 500;
 }
 

@@ -185,13 +185,14 @@
       <div class="generate-btn-box">
         <button id="generate-btn">
           <div class="btn-content" data-text="Generate" data-hover="Punch it!"></div>
+          {% block generate_button_extras %}{% endblock %}
         </button>
       </div>
 
       <!-- Output Area -->
       <div class="output-area">
         <div id="output-text" class="editor-container"></div>
-        <div class="labelline">Open Interview Times (OITs) in UTC</div>
+        {% block output_labelline %}{% endblock %}
       </div>
     </div>
 

@@ -11,23 +11,62 @@ Quickly convert lists into clean, comma-separated formats for use in data entry,
 Perfect for simplifying raw inputs, reformatting copy-pasted lists, and saving time on repetitive tasks.
 {% endblock %}
 
+{% block output_labelline %}
+<div class="labelline">Comma-Separated list</div>
+{% endblock %}
+
+{% block generate_button_extras %}
+  <div class="star star-1">
+    <svg viewBox="0 0 784.11 815.53">
+      <path d="M392.05 0c-20.9,210.08 -184.06,378.41 -392.05,407.78
+               207.96,29.37 371.12,197.68 392.05,407.74
+               20.93,-210.06 184.09,-378.37 392.05,-407.74
+               -207.98,-29.38 -371.16,-197.69 -392.06,-407.78z"/>
+    </svg>
+  </div>
+  <div class="star star-2">
+    <svg viewBox="0 0 784.11 815.53">
+      <path d="M392.05 0c-20.9,210.08 -184.06,378.41 -392.05,407.78
+               207.96,29.37 371.12,197.68 392.05,407.74
+               20.93,-210.06 184.09,-378.37 392.05,-407.74
+               -207.98,-29.38 -371.16,-197.69 -392.06,-407.78z"/>
+    </svg>
+  </div>
+  <div class="star star-3">
+    <svg viewBox="0 0 784.11 815.53">
+      <path d="M392.05 0c-20.9,210.08 -184.06,378.41 -392.05,407.78
+               207.96,29.37 371.12,197.68 392.05,407.74
+               20.93,-210.06 184.09,-378.37 392.05,-407.74
+               -207.98,-29.38 -371.16,-197.69 -392.06,-407.78z"/>
+    </svg>
+  </div>
+  <div class="star star-4">
+    <svg viewBox="0 0 784.11 815.53">
+      <path d="M392.05 0c-20.9,210.08 -184.06,378.41 -392.05,407.78
+               207.96,29.37 371.12,197.68 392.05,407.74
+               20.93,-210.06 184.09,-378.37 392.05,-407.74
+               -207.98,-29.38 -371.16,-197.69 -392.06,-407.78z"/>
+    </svg>
+  </div>
+{% endblock %}
+
 {% block modal_content %}
 <h2>How to Use</h2>
 <ol class="modal-steps">
-  <li>Copy your raw list (e.g., names, IDs, values) from any source</li>
+  <li>Copy your raw list (e.g. names, IDs, values) from your source</li>
   <li>
     Paste it into the
     <span class="soft-highlight">"Copy-paste your text here"</span> box
   </li>
   <li>
     Click the
-    <img src="{{ url_for('static', filename='images/generate-button.png') }}" alt="Generate button"
+    <img src="{{ url_for('static', filename='images/generate-button-comma.png') }}" alt="Generate button"
       class="inline-button-img" />
     button
   </li>
   <li>
-    View the formatted comma-separated list in the
-    <span class="soft-highlight">output box</span>
+    View results in the
+    <span class="soft-highlight">"Comma-Separated list"</span> box
   </li>
 </ol>
 {% endblock %}

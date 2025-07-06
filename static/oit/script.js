@@ -1,17 +1,26 @@
-// Wait until the entire page and resources are fully loaded
+// Wait until the entire page and assets are fully loaded
 window.addEventListener("load", () => {
-  // Make the body visible after load (used to prevent flash of unstyled content)
+  // Prevents flash of unstyled content
   document.body.classList.add("loaded");
 
-  // Load the Monaco Editor and set up editors, context menus, and button logic
+  // Load Monaco Editor and initialize everything once ready
   loadMonacoEditor(() => {
+    // Dynamically adjust font size based on screen width
+    const adjustFontSize = () => (window.innerWidth <= 1440 ? 13 : 14);
 
-    // Adjust editor font size depending on screen width
-    function adjustFontSize() {
-      return window.innerWidth <= 1440 ? 13 : 14;
-    }
+    // Cache DOM elements used across the script
+    const inputContainer = document.getElementById("input-text");
+    const outputContainer = document.getElementById("output-text");
+    const inputArea = document.querySelector(".input-area");
+    const inputCont = inputArea.querySelector(".editor-container");
+    const outputArea = document.querySelector(".output-area");
+    const outputCont = outputArea.querySelector(".editor-container");
+    const generateBtn = document.getElementById("generate-btn");
+    const infoBtn = document.getElementById("info-button");
+    const infoModal = document.getElementById("info-modal");
+    const closeModal = document.querySelector(".info-modal .close");
 
-    // Shared Monaco editor settings for both input and output editors
+    // Shared Monaco Editor settings for both input and output editors
     const commonOpts = {
       fontFamily: 'JetBrains Mono, monospace',
       language: "json",
@@ -30,27 +39,26 @@ window.addEventListener("load", () => {
       fontSize: adjustFontSize()
     };
 
-    // Create the main editors
-    const inputEditor = monaco.editor.create(document.getElementById("input-text"), {
+    // Create Monaco Editors
+    const inputEditor = monaco.editor.create(inputContainer, {
       value: "",
       ...commonOpts
     });
 
-    const outputEditor = monaco.editor.create(document.getElementById("output-text"), {
+    const outputEditor = monaco.editor.create(outputContainer, {
       value: "",
       readOnly: true,
       ...commonOpts
     });
 
-    // Custom right-click menu handler (copy, paste, format, etc.)
+    // Create custom right-click menu for Monaco editors
     const createMenu = (editor, items, x, y) => {
-      const prev = document.getElementById("custom-context-menu");
-      if (prev) prev.remove();
+      document.getElementById("custom-context-menu")?.remove(); // Remove existing menu if any
 
       const menu = document.createElement("div");
       menu.id = "custom-context-menu";
-      menu.style.top = y + "px";
-      menu.style.left = x + "px";
+      menu.style.top = `${y}px`;
+      menu.style.left = `${x}px`;
 
       items.forEach(({ label, command }) => {
         const item = document.createElement("div");
@@ -67,8 +75,8 @@ window.addEventListener("load", () => {
       document.body.appendChild(menu);
     };
 
-    // Attach context menu to input and output editors
-    document.getElementById("input-text").addEventListener("contextmenu", e => {
+    // Adds right-click menu to input box
+    inputContainer.addEventListener("contextmenu", e => {
       e.preventDefault();
       createMenu(inputEditor, [
         { label: "Copy", command: "editor.action.clipboardCopyAction" },
@@ -77,95 +85,69 @@ window.addEventListener("load", () => {
       ], e.pageX, e.pageY);
     });
 
-    document.getElementById("output-text").addEventListener("contextmenu", e => {
+    // Adds right-click menu to output box (Copy only)
+    outputContainer.addEventListener("contextmenu", e => {
       e.preventDefault();
       createMenu(outputEditor, [
         { label: "Copy", command: "editor.action.clipboardCopyAction" }
       ], e.pageX, e.pageY);
     });
 
-    // Hide context menu when clicking anywhere else
+    // Closes custom context menu when clicking outside
     document.addEventListener("click", () => {
-      const menu = document.getElementById("custom-context-menu");
-      if (menu) menu.remove();
+      document.getElementById("custom-context-menu")?.remove();
     });
 
-    // Helper to toggle styling classes based on input editor content
-    function updateInputStyling() {
+    // Update input area styling (border and label) based on focus or content
+    const updateInputStyling = (forceFocus = false) => {
       const hasContent = inputEditor.getValue().trim() !== "";
-      const inputArea = document.querySelector(".input-area");
-      const inputCont = document.querySelector(".input-area .editor-container");
+      inputArea.classList.toggle("focused", forceFocus || hasContent);
+      inputArea.classList.toggle("has-content", hasContent);
+    };
 
-      inputArea.classList.toggle("focused", hasContent);
-      inputCont.classList.toggle("has-content", hasContent);
-    }
-
-    // Auto-format input JSON after pasting, and style the input area if it has content
+    // Format input when pasting content
     inputEditor.onDidPaste(() => {
-      try {
-        const raw = inputEditor.getValue();
-        const formatted = JSON.stringify(JSON.parse(raw), null, 2);
-        inputEditor.setValue(formatted);
-        updateInputStyling();
-      } catch (e) {
-        console.error("Invalid JSON", e);
-      }
+      updateInputStyling();
     });
 
-    // Apply or remove styling on focus/blur
-    inputEditor.onDidFocusEditorText(updateInputStyling);
-    inputEditor.onDidBlurEditorText(updateInputStyling);
+    // Update input area border and label on focus/blur
+    inputEditor.onDidFocusEditorText(() => updateInputStyling(true));
+    inputEditor.onDidBlurEditorText(() => updateInputStyling(false));
 
     // Handle click on "Generate" button — send input to backend and display result
-    document.getElementById("generate-btn").addEventListener("click", () => {
-      fetch("/process", {
+    generateBtn.addEventListener("click", () => {
+      const input = inputEditor.getValue();
+
+      fetch("/comma", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ text: inputEditor.getValue() })
+        body: JSON.stringify({ text: input })
       })
         .then(res => res.json())
         .then(data => {
-          outputEditor.setValue(data.printing_times);
+          const result = data.printing_times || data.formatted || "";
+          outputEditor.setValue(result);
 
-          const outArea = document.querySelector(".output-area");
-          const outCont = document.querySelector(".output-area .editor-container");
-
-          if (data.printing_times.trim() !== "") {
-            outArea.classList.add("focused");
-            outCont.classList.add("has-content");
-          } else {
-            outArea.classList.remove("focused");
-            outCont.classList.remove("has-content");
-          }
+          const hasOutput = result.trim() !== "";
+          outputArea.classList.toggle("focused", hasOutput);
+          outputArea.classList.toggle("has-content", hasOutput);
         })
         .catch(err => console.error("Error:", err));
     });
 
-    // Update editor font size when window is resized
+    // Resize editor font size when window is resized
     window.addEventListener("resize", () => {
       const fontSize = adjustFontSize();
       inputEditor.updateOptions({ fontSize });
       outputEditor.updateOptions({ fontSize });
     });
 
-    // Info modal: open and close behavior for the "How to Use" popup
-    const infoBtn = document.getElementById("info-button");
-    const infoModal = document.getElementById("info-modal");
-    const closeModal = document.querySelector(".info-modal .close");
-
+    // Show and hide the "How to Use" info modal
     if (infoBtn && infoModal && closeModal) {
-      infoBtn.addEventListener("click", () => {
-        infoModal.style.display = "block";
-      });
-
-      closeModal.addEventListener("click", () => {
-        infoModal.style.display = "none";
-      });
-
-      window.addEventListener("click", (event) => {
-        if (event.target === infoModal) {
-          infoModal.style.display = "none";
-        }
+      infoBtn.addEventListener("click", () => infoModal.style.display = "block");
+      closeModal.addEventListener("click", () => infoModal.style.display = "none");
+      window.addEventListener("click", e => {
+        if (e.target === infoModal) infoModal.style.display = "none";
       });
     }
   });

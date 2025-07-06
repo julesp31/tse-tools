@@ -11,6 +11,10 @@ Fetches a User's Open Interview Times (OITs) at the time the candidate's intervi
 This considers the free/busy times we gather from a User's integrated external calendar and their Paradox availability.
 {% endblock %}
 
+{% block output_labelline %}
+<div class="labelline">Open Interview Times (OITs) in UTC</div>
+{% endblock %}
+
 {% block modal_content %}
 <h2>How to Use</h2>
 <ol class="modal-steps">
@@ -21,7 +25,7 @@ This considers the free/busy times we gather from a User's integrated external c
   </li>
   <li>
     Click the
-    <img src="{{ url_for('static', filename='images/generate-button.png') }}" alt="Generate button"
+    <img src="{{ url_for('static', filename='images/generate-button-oit.png') }}" alt="Generate button"
       class="inline-button-img" />
     button
   </li>

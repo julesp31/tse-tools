@@ -485,6 +485,7 @@ body.loaded {
 * 14. Generate Button
 ***************************************************************/
 .generate-btn-box {
+  position: relative;
   text-align: center;
   margin: 0 20px;
 }
@@ -508,7 +509,7 @@ body.loaded {
   text-align: center;
   white-space: nowrap;
   position: relative;
-  z-index: 0;
+  z-index: 1;
 }
 
 #generate-btn:hover {
@@ -521,47 +522,42 @@ body.loaded {
 .star {
   position: absolute;
   pointer-events: none;
-  visibility: hidden;
   opacity: 0;
+  visibility: hidden;
+  z-index: 2;
   transition:
     opacity 0.3s ease,
-    transform 0.6s ease,
-    visibility 0s linear;
+    transform 0.6s ease;
 }
 
-#generate-btn:hover .star {
+.star svg {
+  opacity: 1;
+  fill: #25c9d0;
+  transition: opacity 0.3s ease;
+  animation: sparkle 1.5s ease-in-out infinite;
+  animation-delay: inherit;
+}
+
+.generate-btn-box:hover .star {
   opacity: 1;
   visibility: visible;
 }
 
-#generate-btn:not(:hover) .star {
-  opacity: 0;
-  visibility: hidden;
-  transition-delay: 0s, 0s, 0.6s;
-}
+/* Small stars - inside */
+.star-1 { top: 15%; left: 35%; animation-delay: 0.6s; }
+.star-2 { top: 62%; left: 60%; animation-delay: 0.9s; }
 
-.star svg {
-  opacity: 0;
-  fill: #25c9d0;
-  transition: opacity 0.3s ease;
-  animation: sparkle 1.2s ease-in-out infinite;
-  animation-delay: inherit;
-}
+/* Medium stars - border */
+.star-3 { top: -15%; left: 80%; animation-delay: 1.2s; }
+.star-4 { top: 91%; left: 10%; animation-delay: 1.5s; }
 
-#generate-btn:hover .star svg {
-  opacity: 1;
-  filter: drop-shadow(0 0 6px #25c9d0);
-}
+/* Large stars - outside */
+.star-5 { top: -20%; left: -10%; animation-delay: 1.8s; }
+.star-6 { top: 98%; left: 100%; animation-delay: 2.1s; }
 
-.star-1 { top: 60%;    left: 33px; animation-delay: 0.6s; }
-.star-2 { top: 20%;    left: 27px; animation-delay: 0.9s; }
-.star-3 { bottom: -12px; left: 35px; animation-delay: 1.2s; }
-.star-4 { bottom: 84px; left: 34px; animation-delay: 1.5s; }
-
-.star-1 svg { width: 10px; height: 10px; }
-.star-2 svg { width: 10px; height: 10px; }
-.star-3 svg { width: 14px; height: 14px; }
-.star-4 svg { width: 14px; height: 14px; }
+.star-1 svg, .star-2 svg { width: 10px; height: 10px; }
+.star-3 svg, .star-4 svg { width: 14px; height: 14px; }
+.star-5 svg, .star-6 svg { width: 18px; height: 18px; }
 
 @keyframes sparkle {
   0%, 100% {
@@ -769,4 +765,20 @@ body.loaded {
   #info-button {
     transform: scale(0.9);
   }
+
+  /* small stars - inside */
+  .star-1 { top: 5%; left: 35%; animation-delay: 0.6s; }
+  .star-2 { top: 50%; left: 60%; animation-delay: 0.9s; }
+
+  /* medium stars - border */
+  .star-3 { top: -22%; left: 75%; animation-delay: 1.2s; }
+  .star-4 { top: 81%; left: 15%; animation-delay: 1.5s; }
+
+  /* large stars - outside */
+  .star-5 { top: -30%; left: -12%; animation-delay: 1.8s; }
+  .star-6 { top: 92%; left: 102%; animation-delay: 2.1s; }
+
+  .star-1 svg, .star-2 svg { width: 6px; height: 6px; }
+  .star-3 svg, .star-4 svg { width: 10px; height: 10px; }
+  .star-5 svg, .star-6 svg { width: 14px; height: 14px; }
 }

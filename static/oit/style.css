@@ -479,6 +479,7 @@ body.loaded {
 * 14. Generate Button
 ***************************************************************/
 .generate-btn-box {
+  position: relative;
   text-align: center;
   margin: 0 20px;
 }

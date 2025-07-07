@@ -183,9 +183,9 @@
 
       <!-- Generate Button -->
       <div class="generate-btn-box">
+        {% block generate_button_extras %}{% endblock %}
         <button id="generate-btn">
           <div class="btn-content" data-text="Generate" data-hover="Punch it!"></div>
-          {% block generate_button_extras %}{% endblock %}
         </button>
       </div>
 

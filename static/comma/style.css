@@ -653,7 +653,7 @@ body.loaded {
 }
 
 .info-modal-content {
-  background-color: #1e1e1e;
+  background-color: rgba(80, 80, 80, 1);
   color: #EDEDED;
   margin: 11% auto;
   padding: 30px 30px 40px;

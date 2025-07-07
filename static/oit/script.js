@@ -118,7 +118,7 @@ window.addEventListener("load", () => {
     generateBtn.addEventListener("click", () => {
       const input = inputEditor.getValue();
 
-      fetch("/comma", {
+      fetch("/process", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ text: input })
